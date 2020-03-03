@@ -1,0 +1,95 @@
+//
+//  ChracterTableViewController.swift
+//  RickAndMorty
+//
+//  Created by Alexey Efimov on 03.03.2020.
+//  Copyright © 2020 Alexey Efimov. All rights reserved.
+//
+
+import UIKit
+
+class ChracterTableViewController: UITableViewController {
+    
+    // MARK: Public properties
+    var chracter: Character?
+    
+    //MARK: Private properties
+    private let urlString = "https://rickandmortyapi.com/api/character"
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var filteredChracter: [Result] = []
+    private var searchBarIsEmpty: Bool {
+        guard let text = searchController.searchBar.text else { return false }
+        return text.isEmpty
+    }
+    private var isFiltering: Bool {
+        return searchController.isActive && !searchBarIsEmpty
+    }
+    
+    // MARK: - UIViewController Methods
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        NetworkManager.shared.fetchData(from: urlString) { character in
+            DispatchQueue.main.async {
+                self.chracter = character
+                self.tableView.reloadData()
+            }
+        }
+        
+        title = "Rick&Morty"
+        tableView.backgroundColor = .black
+        setupSearchController()
+    }
+    
+    // MARK: - Table view data source
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return isFiltering ? filteredChracter.count : chracter?.results.count ?? 0
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
+        
+        let result = isFiltering ? filteredChracter[indexPath.row] : chracter?.results[indexPath.row]
+        cell.configure(with: result)
+    
+        return cell
+    }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let indexPath = tableView.indexPathForSelectedRow else { return }
+        let person = isFiltering ? filteredChracter[indexPath.row] : chracter?.results[indexPath.row]
+        let detailVC = segue.destination as! DetailsViewController
+        detailVC.chracter = person
+    }
+    
+    // MARK: - Private methods
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        searchController.searchBar.barTintColor = .white
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        
+        if let textField = searchController.searchBar.value(forKey: "searchField") as? UITextField {
+            textField.font = UIFont.boldSystemFont(ofSize: 17)
+            textField.textColor = .white
+        }
+    }
+}
+
+// MARK: - UISearchResultsUpdating
+extension ChracterTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+    
+    private func filterContentForSearchText(_ searchText: String) {
+        filteredChracter = chracter?.results.filter { chracter in chracter.name.lowercased().contains(searchText.lowercased())
+        } ?? []
+        
+        tableView.reloadData()
+    }
+}
