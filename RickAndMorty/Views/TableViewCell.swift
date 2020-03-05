@@ -11,12 +11,12 @@ import UIKit
 class TableViewCell: UITableViewCell {
     
     // MARK: IBOutlets
-    @IBOutlet weak var chracterImageView: UIImageView! {
+    @IBOutlet weak var characterImageView: UIImageView! {
         didSet {
-            chracterImageView.contentMode = .scaleAspectFit
-            chracterImageView.clipsToBounds = true
-            chracterImageView.layer.cornerRadius = chracterImageView.bounds.height/2
-            chracterImageView.backgroundColor = .white
+            characterImageView.contentMode = .scaleAspectFit
+            characterImageView.clipsToBounds = true
+            characterImageView.layer.cornerRadius = characterImageView.bounds.height / 2
+            characterImageView.backgroundColor = .white
         }
     }
     
@@ -35,12 +35,13 @@ class TableViewCell: UITableViewCell {
     // MARK: - Public methods
     func configure(with result: Result?) {
         nameLabel.text = result?.name
+//        chracterImageView.image = nil
         DispatchQueue.global().async {
             guard let stringUrl = result?.image else { return }
             guard let imageUrl = URL(string: stringUrl) else { return }
             guard let imageData = try? Data(contentsOf: imageUrl) else { return }
             DispatchQueue.main.async {
-                self.chracterImageView.image = UIImage(data: imageData)
+                self.characterImageView.image = UIImage(data: imageData)
             }
         }
     }
