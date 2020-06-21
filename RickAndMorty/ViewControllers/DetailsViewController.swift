@@ -44,7 +44,6 @@ class DetailsViewController: UIViewController {
     
     private func setupChracterImageView() {
         chracterImageView.layer.cornerRadius = chracterImageView.bounds.width / 2
-        chracterImageView.image = UIImage(named: "bi")
         chracterImageView.backgroundColor = .white
             
         DispatchQueue.global().async {
@@ -67,7 +66,6 @@ class DetailsViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        navigationItem.leftBarButtonItem = nil
         title = chracter.name
         
         if let topItem = navigationController?.navigationBar.topItem {

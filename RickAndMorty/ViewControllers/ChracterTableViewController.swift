@@ -10,10 +10,8 @@ import UIKit
 
 class ChracterTableViewController: UITableViewController {
     
-    // MARK: Public properties
-    var chracter: Character?
-    
     //MARK: Private properties
+    private var chracter: Character?
     private let urlString = "https://rickandmortyapi.com/api/character"
     private let searchController = UISearchController(searchResultsController: nil)
     private var filteredChracter: [Result] = []
@@ -110,7 +108,8 @@ extension ChracterTableViewController: UISearchResultsUpdating {
     }
     
     private func filterContentForSearchText(_ searchText: String) {
-        filteredChracter = chracter?.results.filter { chracter in chracter.name.lowercased().contains(searchText.lowercased())
+        filteredChracter = chracter?.results.filter { chracter in
+            chracter.name.lowercased().contains(searchText.lowercased())
         } ?? []
         
         tableView.reloadData()
