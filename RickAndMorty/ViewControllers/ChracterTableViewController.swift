@@ -29,16 +29,19 @@ class ChracterTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupNavigationBar()
+        setupSearchController()
+        
+        tableView.rowHeight = 70
+        tableView.backgroundColor = .black
+        
         NetworkManager.shared.fetchData(from: urlString) { character in
             DispatchQueue.main.async {
                 self.chracter = character
                 self.tableView.reloadData()
             }
         }
-        
-        title = "Rick&Morty"
-        tableView.backgroundColor = .black
-        setupSearchController()
     }
     
     // MARK: - Table view data source
@@ -77,6 +80,26 @@ class ChracterTableViewController: UITableViewController {
             textField.font = UIFont.boldSystemFont(ofSize: 17)
             textField.textColor = .white
         }
+    }
+    
+    // Setup navigation bar
+    private func setupNavigationBar() {
+        
+        title = "Rick & Morty"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        // Navigation bar appearance
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.backgroundColor = .black
+            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+
+            navigationController?.navigationBar.standardAppearance = navBarAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+        }
+        
     }
 }
 
