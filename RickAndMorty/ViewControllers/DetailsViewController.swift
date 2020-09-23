@@ -47,9 +47,7 @@ class DetailsViewController: UIViewController {
         chracterImageView.backgroundColor = .white
             
         DispatchQueue.global().async {
-            let stringUrl = self.chracter.image
-            guard let imageUrl = URL(string: stringUrl) else { return }
-            guard let imageData = try? Data(contentsOf: imageUrl) else { return }
+            guard let imageData = ImageManager.shared.fetchImage(from: self.chracter.image) else { return }
             DispatchQueue.main.async {
                 self.chracterImageView.image = UIImage(data: imageData)
             }

@@ -9,7 +9,15 @@
 import UIKit
 
 extension UIViewController {
-    func transform(for view: UIView, nameAnimation: String, duration: CFTimeInterval, fromValue: Float, toValue: Float, autoreverses: Bool, repeatCount: Float) {
+    func transform(
+        for view: UIView,
+        nameAnimation: String,
+        duration: CFTimeInterval,
+        fromValue: Float,
+        toValue: Float,
+        autoreverses: Bool,
+        repeatCount: Float
+    ) {
         
         let animation = CASpringAnimation(keyPath: nameAnimation)
         
