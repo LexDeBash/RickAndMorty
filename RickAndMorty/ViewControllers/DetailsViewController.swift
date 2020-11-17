@@ -28,14 +28,6 @@ class DetailsViewController: UIViewController {
         super.viewDidLoad()
         setupChracterImageView()
         view.backgroundColor = .black
-        transform(for: chracterImageView,
-                  nameAnimation: "transform.scale",
-                  duration: 0.7,
-                  fromValue: 0.97,
-                  toValue: 1.93,
-                  autoreverses: true,
-                  repeatCount: Float.greatestFiniteMagnitude)
-        
         setupLabels()
         setupNavigationBar()
     }

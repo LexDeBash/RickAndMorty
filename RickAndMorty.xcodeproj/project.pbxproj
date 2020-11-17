@@ -17,7 +17,6 @@
 		A82B8640240E409C00139807 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82B863F240E409C00139807 /* TableViewCell.swift */; };
 		A82B8642240E40E100139807 /* RickAndMorty.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82B8641240E40E100139807 /* RickAndMorty.swift */; };
 		A82B8644240E411E00139807 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82B8643240E411E00139807 /* NetworkManager.swift */; };
-		A82B8647240E421C00139807 /* Extension + UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82B8646240E421C00139807 /* Extension + UIViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +32,6 @@
 		A82B863F240E409C00139807 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		A82B8641240E40E100139807 /* RickAndMorty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RickAndMorty.swift; sourceTree = "<group>"; };
 		A82B8643240E411E00139807 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		A82B8646240E421C00139807 /* Extension + UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIViewController.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +68,6 @@
 				A82B8634240E3EF600139807 /* ViewControllers */,
 				A82B863E240E408000139807 /* Views */,
 				A82B8639240E3F4800139807 /* Managers */,
-				A82B8645240E41F500139807 /* Extensions */,
 				A82B8633240E3EAC00139807 /* SupportingFiles */,
 				A82B8635240E3F1300139807 /* Storyboards */,
 				A82B8636240E3F2600139807 /* Sourse */,
@@ -136,14 +133,6 @@
 				A82B863F240E409C00139807 /* TableViewCell.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		A82B8645240E41F500139807 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				A82B8646240E421C00139807 /* Extension + UIViewController.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,7 +208,6 @@
 			files = (
 				A82B863B240E3FFA00139807 /* ChracterTableViewController.swift in Sources */,
 				A82B8620240E3E9100139807 /* AppDelegate.swift in Sources */,
-				A82B8647240E421C00139807 /* Extension + UIViewController.swift in Sources */,
 				A82B8622240E3E9100139807 /* SceneDelegate.swift in Sources */,
 				A82B8644240E411E00139807 /* NetworkManager.swift in Sources */,
 				A82B8642240E40E100139807 /* RickAndMorty.swift in Sources */,
