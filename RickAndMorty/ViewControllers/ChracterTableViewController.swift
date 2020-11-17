@@ -12,7 +12,6 @@ class ChracterTableViewController: UITableViewController {
     
     //MARK: Private properties
     private var chracter: Character?
-    private let urlString = "https://rickandmortyapi.com/api/character"
     private let searchController = UISearchController(searchResultsController: nil)
     private var filteredChracter: [Result] = []
     private var searchBarIsEmpty: Bool {
@@ -34,11 +33,9 @@ class ChracterTableViewController: UITableViewController {
         tableView.rowHeight = 70
         tableView.backgroundColor = .black
         
-        NetworkManager.shared.fetchData(from: urlString) { character in
-            DispatchQueue.main.async {
-                self.chracter = character
-                self.tableView.reloadData()
-            }
+        NetworkManager.shared.fetchData(from: URLS.rickandmortyapi.rawValue) { character in
+            self.chracter = character
+            self.tableView.reloadData()
         }
     }
     

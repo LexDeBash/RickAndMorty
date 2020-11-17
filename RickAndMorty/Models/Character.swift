@@ -28,3 +28,7 @@ struct Origin: Decodable {
 struct Location: Decodable {
     let name: String
 }
+
+enum URLS: String {
+    case rickandmortyapi = "https://rickandmortyapi.com/api/character"
+}
