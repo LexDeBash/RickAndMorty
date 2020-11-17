@@ -24,7 +24,9 @@ class NetworkManager {
             
             do {
                 let character = try JSONDecoder().decode(Character.self, from: data)
-                complition(character)
+                DispatchQueue.main.async {
+                    complition(character)
+                }
             } catch let jsonError {
                 print(jsonError.localizedDescription)
             }
