@@ -6,11 +6,11 @@
 //  Copyright © 2020 Alexey Efimov. All rights reserved.
 //
 
-struct Character: Decodable {
-    let results: [Result]
+struct RickAndMorty: Decodable {
+    let results: [Character]
 }
 
-struct Result: Decodable {
+struct Character: Decodable {
     let id: Int
     let name: String
     let status: String

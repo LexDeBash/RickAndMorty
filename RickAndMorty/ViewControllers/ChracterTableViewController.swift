@@ -11,9 +11,9 @@ import UIKit
 class ChracterTableViewController: UITableViewController {
     
     //MARK: Private properties
-    private var chracter: Character?
+    private var chracter: RickAndMorty?
     private let searchController = UISearchController(searchResultsController: nil)
-    private var filteredChracter: [Result] = []
+    private var filteredChracter: [Character] = []
     private var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
         return text.isEmpty

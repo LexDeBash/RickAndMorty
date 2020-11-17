@@ -22,7 +22,7 @@ class TableViewCell: UITableViewCell {
     }
     
     // MARK: - Public methods
-    func configure(with result: Result?) {
+    func configure(with result: Character?) {
         nameLabel.text = result?.name
         DispatchQueue.global().async {
             guard let stringUrl = result?.image else { return }

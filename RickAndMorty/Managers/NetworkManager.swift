@@ -14,21 +14,25 @@ class NetworkManager {
     
     private init() {}
     
-    func fetchData(from urlString: String, with complition: @escaping (Character) -> Void) {
+    func fetchData(from url: String, with complition: @escaping (RickAndMorty) -> Void) {
         
-        guard let url = URL(string: urlString) else { return }
+        guard let url = URL(string: url) else { return }
         
         URLSession.shared.dataTask(with: url) { (data, _, error) in
-            if let error = error { print(error); return }
+            if let error = error {
+                print(error)
+                return
+            }
+            
             guard let data = data else { return }
             
             do {
-                let character = try JSONDecoder().decode(Character.self, from: data)
+                let character = try JSONDecoder().decode(RickAndMorty.self, from: data)
                 DispatchQueue.main.async {
                     complition(character)
                 }
-            } catch let jsonError {
-                print(jsonError.localizedDescription)
+            } catch let error {
+                print(error)
             }
             
         }.resume()

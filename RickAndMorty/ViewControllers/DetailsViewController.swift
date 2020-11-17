@@ -21,7 +21,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var locationLabel: UILabel!
     
     // MARK: - Public properties
-    var chracter: Result!
+    var chracter: Character!
     
     // MARK: - UIViewController Methods
     override func viewDidLoad() {
