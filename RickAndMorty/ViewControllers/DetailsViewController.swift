@@ -13,22 +13,22 @@ class DetailsViewController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet weak var chracterImageView: UIImageView!
     
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var statusLabel: UILabel!
-    @IBOutlet weak var speciesLabel: UILabel!
-    @IBOutlet weak var genderLabel: UILabel!
-    @IBOutlet weak var originLabel: UILabel!
-    @IBOutlet weak var locationLabel: UILabel!
-    
+    @IBOutlet weak var descriptionLabel: UILabel!
+//    @IBOutlet weak var statusLabel: UILabel!
+//    @IBOutlet weak var speciesLabel: UILabel!
+//    @IBOutlet weak var genderLabel: UILabel!
+//    @IBOutlet weak var originLabel: UILabel!
+//    @IBOutlet weak var locationLabel: UILabel!
+//
     // MARK: - Public properties
     var chracter: Character!
     
     // MARK: - UIViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        descriptionLabel.text = chracter.description
         setupChracterImageView()
         view.backgroundColor = .black
-        setupLabels()
         setupNavigationBar()
     }
     
@@ -44,15 +44,6 @@ class DetailsViewController: UIViewController {
                 self.chracterImageView.image = UIImage(data: imageData)
             }
         }
-    }
-    
-    private func setupLabels() {
-        nameLabel.text = "My name is \(chracter.name)"
-        statusLabel.text = "Status - \(chracter.status)"
-        speciesLabel.text = "Species - \(chracter.species)"
-        genderLabel.text = "Gender - \(chracter.gender)"
-        originLabel.text = "Origin - \(chracter.origin.name)"
-        locationLabel.text = "Location - \(chracter.location.name)"
     }
     
     private func setupNavigationBar() {
