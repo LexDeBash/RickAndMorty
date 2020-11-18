@@ -15,7 +15,12 @@ class EpisodesViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 70
-        tableView.backgroundColor = .black
+        tableView.backgroundColor = UIColor(
+            red: 21/255,
+            green: 32/255,
+            blue: 66/255,
+            alpha: 1
+        )
         
         let navBarAppearance = UINavigationBarAppearance()
         navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
