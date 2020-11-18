@@ -14,9 +14,9 @@ class NetworkManager {
     
     private init() {}
     
-    func fetchData(from url: String, with complition: @escaping (RickAndMorty) -> Void) {
-        
-        guard let url = URL(string: url) else { return }
+    func fetchData(from url: String?, with complition: @escaping (RickAndMorty) -> Void) {
+        guard let stringURL = url else { return }
+        guard let url = URL(string: stringURL) else { return }
         
         URLSession.shared.dataTask(with: url) { (data, _, error) in
             if let error = error {

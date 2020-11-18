@@ -26,17 +26,12 @@ class ChracterTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupNavigationBar()
-        setupSearchController()
-        
         tableView.rowHeight = 70
         tableView.backgroundColor = .black
         
-        NetworkManager.shared.fetchData(from: URLS.rickandmortyapi.rawValue) { rickAndMorty in
-            self.rickAndMorty = rickAndMorty
-            self.tableView.reloadData()
-        }
+        setupNavigationBar()
+        setupSearchController()
+        fetchData(from: URLS.rickandmortyapi.rawValue)
     }
     
     // MARK: - Table view data source
@@ -60,6 +55,12 @@ class ChracterTableViewController: UITableViewController {
         let character = isFiltering ? filteredChracter[indexPath.row] : rickAndMorty?.results[indexPath.row]
         let detailVC = segue.destination as! CharcterDetailsViewController
         detailVC.charcterUrl = character?.url
+    }
+    
+    @IBAction func updateData(_ sender: UIBarButtonItem) {
+        sender.tag == 1
+            ? fetchData(from: rickAndMorty?.info.next)
+            : fetchData(from: rickAndMorty?.info.prev)
     }
     
     // MARK: - Private methods
@@ -95,6 +96,13 @@ class ChracterTableViewController: UITableViewController {
             navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
         }
         
+    }
+    
+    private func fetchData(from url: String?) {
+        NetworkManager.shared.fetchData(from: url) {  rickAndMorty in
+            self.rickAndMorty = rickAndMorty
+            self.tableView.reloadData()
+        }
     }
 }
 

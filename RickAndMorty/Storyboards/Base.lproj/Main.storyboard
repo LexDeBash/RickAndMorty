@@ -60,7 +60,18 @@
                             <outlet property="delegate" destination="YNn-Vy-Kwq" id="saW-vV-a4F"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="0Ul-Ln-1fH"/>
+                    <navigationItem key="navigationItem" id="0Ul-Ln-1fH">
+                        <barButtonItem key="leftBarButtonItem" title="Prev" id="Z2g-ir-BHh">
+                            <connections>
+                                <action selector="updateData:" destination="YNn-Vy-Kwq" id="fze-hr-1Y4"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" tag="1" title="Next" id="w2a-nh-9JS">
+                            <connections>
+                                <action selector="updateData:" destination="YNn-Vy-Kwq" id="UBY-4E-V56"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TJn-RY-31d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -81,8 +92,8 @@
                                     <constraint firstAttribute="width" constant="240" id="gP3-mG-9yI"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="btk-vP-3AV">
-                                <rect key="frame" x="20" y="436" width="374" height="28"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="btk-vP-3AV">
+                                <rect key="frame" x="20" y="436" width="374" height="0.0"/>
                                 <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -249,7 +260,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z22-8b-j9O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1818.840579710145" y="112.5"/>
+            <point key="canvasLocation" x="2023" y="110"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OKc-3m-kKx">
