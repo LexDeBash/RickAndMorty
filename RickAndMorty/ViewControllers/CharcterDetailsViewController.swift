@@ -22,10 +22,12 @@ class CharcterDetailsViewController: UIViewController {
     var result: Result?
     var charcterUrl: String!
     
+    private var spinnerView: UIActivityIndicatorView!
+    
     // MARK: - UIViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        spinnerView = showSpinner(in: view)
         if let topItem = navigationController?.navigationBar.topItem {
             topItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         }
@@ -37,6 +39,7 @@ class CharcterDetailsViewController: UIViewController {
             guard let imageData = ImageManager.shared.fetchImage(from: result.image) else { return }
             DispatchQueue.main.async {
                 self.chracterImageView.image = UIImage(data: imageData)
+                self.spinnerView.stopAnimating()
             }
         }
     }
@@ -45,5 +48,17 @@ class CharcterDetailsViewController: UIViewController {
         let navigationController = segue.destination as! UINavigationController
         let episodesVC = navigationController.topViewController as! EpisodesViewController
         episodesVC.result = result
+    }
+    
+    private func showSpinner(in view: UIView) -> UIActivityIndicatorView {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.color = .white
+        activityIndicator.startAnimating()
+        activityIndicator.center = view.center
+        activityIndicator.hidesWhenStopped = true
+        
+        view.addSubview(activityIndicator)
+        
+        return activityIndicator
     }
 }
