@@ -59,7 +59,7 @@ class ChracterTableViewController: UITableViewController {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
         let person = isFiltering ? filteredChracter[indexPath.row] : rickAndMorty?.results[indexPath.row]
         let detailVC = segue.destination as! DetailsViewController
-        detailVC.chracter = person
+        detailVC.result = person
     }
     
     // MARK: - Private methods

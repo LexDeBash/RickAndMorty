@@ -99,7 +99,13 @@
                             <constraint firstItem="Cnx-3A-4aw" firstAttribute="top" secondItem="EKg-GV-xJn" secondAttribute="top" constant="16" id="xWp-fV-ajV"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="bDJ-Af-qqt"/>
+                    <navigationItem key="navigationItem" id="bDJ-Af-qqt">
+                        <barButtonItem key="rightBarButtonItem" title="Episodes" id="M0e-aK-Q78">
+                            <connections>
+                                <segue destination="OQo-nq-pG8" kind="presentation" id="Z3T-pS-In6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="chracterImageView" destination="Cnx-3A-4aw" id="UIo-9L-2AB"/>
                         <outlet property="descriptionLabel" destination="btk-vP-3AV" id="cjq-9d-gXV"/>
@@ -107,7 +113,46 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PLC-rc-dfL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3676.811594202899" y="112.5"/>
+            <point key="canvasLocation" x="3445" y="113"/>
+        </scene>
+        <!--Episodes-->
+        <scene sceneID="w7m-f9-Pgb">
+            <objects>
+                <tableViewController id="Bx2-m1-gr5" customClass="EpisodesViewController" customModule="RickAndMorty" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="UFT-eK-kN4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="episode" textLabel="3rM-r5-Dnq" style="IBUITableViewCellStyleDefault" id="ZeP-Vc-8is">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZeP-Vc-8is" id="7jh-Hr-R31">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3rM-r5-Dnq">
+                                            <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Bx2-m1-gr5" id="f39-H3-K3a"/>
+                            <outlet property="delegate" destination="Bx2-m1-gr5" id="01Q-zE-UWE"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Episodes" id="0aU-NV-l35"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VEC-WB-BXu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4841" y="110"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="AKo-Bi-0Ba">
@@ -137,6 +182,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z22-8b-j9O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1818.840579710145" y="112.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="OKc-3m-kKx">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OQo-nq-pG8" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="APG-c6-YsV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Bx2-m1-gr5" kind="relationship" relationship="rootViewController" id="OrC-9U-v4h"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="G6z-KU-16V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4143" y="110"/>
         </scene>
     </scenes>
     <resources>
