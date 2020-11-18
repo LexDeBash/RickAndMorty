@@ -26,6 +26,7 @@ struct Result: Decodable {
     let location: Location
     let image: String
     let episode: [String]
+    let url: String
     
     var description: String {
         """

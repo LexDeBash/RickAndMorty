@@ -28,9 +28,11 @@ class EpisodesViewController: UITableViewController {
             red: 21/255,
             green: 32/255,
             blue: 66/255,
-            alpha: 1
+            alpha: 0.7
         )
+        
         navigationController?.navigationBar.standardAppearance = navBarAppearance
+        navigationController?.navigationBar.barTintColor = .white
     }
 
     // MARK: - Table view data source

@@ -33,7 +33,7 @@ class EpisodeDetailsViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let detailsVC = segue.destination as! DetailsViewController
+        let detailsVC = segue.destination as! CharcterDetailsViewController
         detailsVC.charcterUrl = sender as? String
     }
 
@@ -61,6 +61,7 @@ extension EpisodeDetailsViewController: UITableViewDataSource {
 // MARK: - Table view delegate
 extension EpisodeDetailsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let characterUrl = episode?.characters[indexPath.row]
         performSegue(withIdentifier: "showCharacter", sender: characterUrl)
     }

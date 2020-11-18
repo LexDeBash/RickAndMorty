@@ -57,9 +57,9 @@ class ChracterTableViewController: UITableViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
-        let person = isFiltering ? filteredChracter[indexPath.row] : rickAndMorty?.results[indexPath.row]
-        let detailVC = segue.destination as! DetailsViewController
-        detailVC.result = person
+        let character = isFiltering ? filteredChracter[indexPath.row] : rickAndMorty?.results[indexPath.row]
+        let detailVC = segue.destination as! CharcterDetailsViewController
+        detailVC.charcterUrl = character?.url
     }
     
     // MARK: - Private methods
