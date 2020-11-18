@@ -7,22 +7,36 @@
 //
 
 struct RickAndMorty: Decodable {
+    let info: Info
     let results: [Character]
 }
 
+struct Info: Decodable {
+    let pages: Int
+    let next: String
+    let prev: String
+}
+
 struct Character: Decodable {
-    let id: Int
     let name: String
     let status: String
     let species: String
     let gender: String
-    let origin: Origin
+    let origin: Location
     let location: Location
     let image: String
-}
-
-struct Origin: Decodable {
-    let name: String
+    let episode: [String]
+    
+    var description: String {
+        """
+    Name: \(name)
+    Status: \(status)
+    Species: \(species)
+    Gender: \(gender)
+    Origin: \(origin.name)
+    Location: \(location.name)
+    """
+    }
 }
 
 struct Location: Decodable {
