@@ -43,6 +43,25 @@ struct Location: Decodable {
     let name: String
 }
 
+struct Episode: Decodable {
+    let name: String
+    let date: String
+    let episode: String
+    
+    var description: String {
+        """
+    episode: \(name)
+    date: \(date)
+    """
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case name = "name"
+        case date = "air_date"
+        case episode = "episode"
+    }
+}
+
 enum URLS: String {
     case rickandmortyapi = "https://rickandmortyapi.com/api/character"
 }

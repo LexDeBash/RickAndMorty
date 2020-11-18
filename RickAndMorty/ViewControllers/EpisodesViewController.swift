@@ -19,7 +19,12 @@ class EpisodesViewController: UITableViewController {
         
         let navBarAppearance = UINavigationBarAppearance()
         navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navBarAppearance.backgroundColor = .black
+        navBarAppearance.backgroundColor = UIColor(
+            red: 21/255,
+            green: 32/255,
+            blue: 66/255,
+            alpha: 1
+        )
         navigationController?.navigationBar.standardAppearance = navBarAppearance
     }
 
@@ -39,15 +44,16 @@ class EpisodesViewController: UITableViewController {
 
         return cell
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let episodeUrl = result.episode[indexPath.row]
+        performSegue(withIdentifier: "showEpisode", sender: episodeUrl)
     }
-    */
+
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let episodeDetailsVC = segue.destination as! EpisodeDetailsViewController
+        episodeDetailsVC.episodeUrl = sender as? String
+    }
 
 }

@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4Gv-5p-Fnm">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -83,7 +82,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="btk-vP-3AV">
-                                <rect key="frame" x="16" y="436" width="382" height="28"/>
+                                <rect key="frame" x="20" y="436" width="374" height="28"/>
                                 <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -93,8 +92,8 @@
                         <color key="backgroundColor" systemColor="labelColor"/>
                         <constraints>
                             <constraint firstItem="Cnx-3A-4aw" firstAttribute="centerX" secondItem="EKg-GV-xJn" secondAttribute="centerX" id="CkP-vZ-HjO"/>
-                            <constraint firstItem="EKg-GV-xJn" firstAttribute="trailing" secondItem="btk-vP-3AV" secondAttribute="trailing" constant="16" id="SEK-1j-f1E"/>
-                            <constraint firstItem="btk-vP-3AV" firstAttribute="leading" secondItem="EKg-GV-xJn" secondAttribute="leading" constant="16" id="hqH-fS-8EB"/>
+                            <constraint firstItem="EKg-GV-xJn" firstAttribute="trailing" secondItem="btk-vP-3AV" secondAttribute="trailing" constant="20" id="SEK-1j-f1E"/>
+                            <constraint firstItem="btk-vP-3AV" firstAttribute="leading" secondItem="EKg-GV-xJn" secondAttribute="leading" constant="20" id="hqH-fS-8EB"/>
                             <constraint firstItem="btk-vP-3AV" firstAttribute="top" secondItem="Cnx-3A-4aw" secondAttribute="bottom" constant="40" id="jXe-cn-OZN"/>
                             <constraint firstItem="Cnx-3A-4aw" firstAttribute="top" secondItem="EKg-GV-xJn" secondAttribute="top" constant="16" id="xWp-fV-ajV"/>
                         </constraints>
@@ -140,7 +139,7 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.082352941176470587" green="0.13333333333333333" blue="0.25882352941176467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -149,10 +148,45 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Episodes" id="0aU-NV-l35"/>
+                    <connections>
+                        <segue destination="E6k-KV-IFi" kind="show" identifier="showEpisode" id="Ntz-YW-SDp"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VEC-WB-BXu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4841" y="110"/>
+        </scene>
+        <!--Episode Details View Controller-->
+        <scene sceneID="Gyr-TR-bKL">
+            <objects>
+                <viewController id="E6k-KV-IFi" customClass="EpisodeDetailsViewController" customModule="RickAndMorty" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bFb-NJ-eZQ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AuC-zd-2fo">
+                                <rect key="frame" x="20" y="96" width="374" height="28"/>
+                                <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="JEZ-cK-oNF"/>
+                        <color key="backgroundColor" red="0.082576114745212301" green="0.13254802287884057" blue="0.25699155008477181" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="AuC-zd-2fo" firstAttribute="leading" secondItem="JEZ-cK-oNF" secondAttribute="leading" constant="20" id="9xf-n7-iVK"/>
+                            <constraint firstItem="AuC-zd-2fo" firstAttribute="top" secondItem="JEZ-cK-oNF" secondAttribute="top" constant="40" id="RT6-TM-BF7"/>
+                            <constraint firstItem="JEZ-cK-oNF" firstAttribute="trailing" secondItem="AuC-zd-2fo" secondAttribute="trailing" constant="20" id="fUS-Td-imv"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Czj-wP-1kR"/>
+                    <connections>
+                        <outlet property="episodeDescriptionLabel" destination="AuC-zd-2fo" id="NcS-Rx-0mO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cAJ-ZR-BLM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5558" y="110"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="AKo-Bi-0Ba">
