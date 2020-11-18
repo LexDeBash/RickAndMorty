@@ -215,6 +215,7 @@
                     <connections>
                         <outlet property="episodeDescriptionLabel" destination="AuC-zd-2fo" id="NcS-Rx-0mO"/>
                         <outlet property="tableView" destination="Umt-A8-dSR" id="HCd-r7-jTi"/>
+                        <segue destination="KWf-tl-WxV" kind="show" identifier="showCharacter" id="SrV-BG-6sA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cAJ-ZR-BLM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -267,6 +268,48 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G6z-KU-16V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4143" y="110"/>
+        </scene>
+        <!--Details View Controller-->
+        <scene sceneID="YJ5-qP-kul">
+            <objects>
+                <viewController id="KWf-tl-WxV" customClass="DetailsViewController" customModule="RickAndMorty" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VUN-6e-uTI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KXz-hn-vnn">
+                                <rect key="frame" x="87" y="72" width="240" height="240"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="nsC-bA-iBA"/>
+                                    <constraint firstAttribute="height" constant="240" id="q2O-Yg-MTu"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="swa-JS-xEg">
+                                <rect key="frame" x="20" y="352" width="374" height="28"/>
+                                <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="agd-6o-hk7"/>
+                        <color key="backgroundColor" red="0.08235294118" green="0.1333333333" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="KXz-hn-vnn" firstAttribute="centerX" secondItem="agd-6o-hk7" secondAttribute="centerX" id="2cc-Uj-NDE"/>
+                            <constraint firstItem="agd-6o-hk7" firstAttribute="trailing" secondItem="swa-JS-xEg" secondAttribute="trailing" constant="20" id="DgQ-Xw-Bpr"/>
+                            <constraint firstItem="swa-JS-xEg" firstAttribute="leading" secondItem="agd-6o-hk7" secondAttribute="leading" constant="20" id="JR8-Fe-DXR"/>
+                            <constraint firstItem="KXz-hn-vnn" firstAttribute="top" secondItem="agd-6o-hk7" secondAttribute="top" constant="16" id="RF7-lD-RIO"/>
+                            <constraint firstItem="swa-JS-xEg" firstAttribute="top" secondItem="KXz-hn-vnn" secondAttribute="bottom" constant="40" id="ySX-61-Mn4"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="N43-Xl-pbe"/>
+                    <connections>
+                        <outlet property="chracterImageView" destination="KXz-hn-vnn" id="RZq-ti-zBo"/>
+                        <outlet property="descriptionLabel" destination="swa-JS-xEg" id="aWu-PN-Vp5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bcc-lD-1S1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6281" y="110"/>
         </scene>
     </scenes>
     <resources>

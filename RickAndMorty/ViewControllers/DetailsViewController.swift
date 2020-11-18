@@ -16,14 +16,29 @@ class DetailsViewController: UIViewController {
 
     // MARK: - Public properties
     var result: Result!
+    var charcterUrl: String?
     
     // MARK: - UIViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        descriptionLabel.text = result.description
-        setupChracterImageView()
-        view.backgroundColor = .black
         setupNavigationBar()
+        setupChracterImageView()
+        
+        if charcterUrl == nil {
+            descriptionLabel.text = result.description
+            fetchImage()
+        }
+        
+        if let charcterUrl = charcterUrl {
+            NetworkManager.shared.fetchCharacter(from: charcterUrl) { result in
+                self.title = result.name
+                self.descriptionLabel.text = result.description
+                guard let imageData = ImageManager.shared.fetchImage(from: result.image) else { return }
+                DispatchQueue.main.async {
+                    self.chracterImageView.image = UIImage(data: imageData)
+                }
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -36,7 +51,9 @@ class DetailsViewController: UIViewController {
     private func setupChracterImageView() {
         chracterImageView.layer.cornerRadius = chracterImageView.bounds.width / 2
         chracterImageView.backgroundColor = .white
-            
+    }
+    
+    private func fetchImage() {
         DispatchQueue.global().async {
             guard let imageData = ImageManager.shared.fetchImage(from: self.result.image) else { return }
             DispatchQueue.main.async {
@@ -46,7 +63,9 @@ class DetailsViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        title = result.name
+        if charcterUrl == nil {
+            title = result.name
+        }
         
         if let topItem = navigationController?.navigationBar.topItem {
             topItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)

@@ -31,6 +31,11 @@ class EpisodeDetailsViewController: UIViewController {
             self.tableView.reloadData()
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let detailsVC = segue.destination as! DetailsViewController
+        detailsVC.charcterUrl = sender as? String
+    }
 
 }
 
@@ -50,5 +55,13 @@ extension EpisodeDetailsViewController: UITableViewDataSource {
         cell.contentConfiguration = content
         
         return cell
+    }
+}
+
+// MARK: - Table view delegate
+extension EpisodeDetailsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let characterUrl = episode?.characters[indexPath.row]
+        performSegue(withIdentifier: "showCharacter", sender: characterUrl)
     }
 }
