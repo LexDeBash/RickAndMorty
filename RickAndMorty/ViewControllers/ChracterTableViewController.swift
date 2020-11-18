@@ -11,9 +11,9 @@ import UIKit
 class ChracterTableViewController: UITableViewController {
     
     //MARK: Private properties
-    private var chracter: RickAndMorty?
+    private var rickAndMorty: RickAndMorty?
     private let searchController = UISearchController(searchResultsController: nil)
-    private var filteredChracter: [Character] = []
+    private var filteredChracter: [Result] = []
     private var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
         return text.isEmpty
@@ -33,8 +33,8 @@ class ChracterTableViewController: UITableViewController {
         tableView.rowHeight = 70
         tableView.backgroundColor = .black
         
-        NetworkManager.shared.fetchData(from: URLS.rickandmortyapi.rawValue) { character in
-            self.chracter = character
+        NetworkManager.shared.fetchData(from: URLS.rickandmortyapi.rawValue) { rickAndMorty in
+            self.rickAndMorty = rickAndMorty
             self.tableView.reloadData()
         }
     }
@@ -42,13 +42,13 @@ class ChracterTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return isFiltering ? filteredChracter.count : chracter?.results.count ?? 0
+        return isFiltering ? filteredChracter.count : rickAndMorty?.results.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
         
-        let result = isFiltering ? filteredChracter[indexPath.row] : chracter?.results[indexPath.row]
+        let result = isFiltering ? filteredChracter[indexPath.row] : rickAndMorty?.results[indexPath.row]
         cell.configure(with: result)
     
         return cell
@@ -57,7 +57,7 @@ class ChracterTableViewController: UITableViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
-        let person = isFiltering ? filteredChracter[indexPath.row] : chracter?.results[indexPath.row]
+        let person = isFiltering ? filteredChracter[indexPath.row] : rickAndMorty?.results[indexPath.row]
         let detailVC = segue.destination as! DetailsViewController
         detailVC.chracter = person
     }
@@ -105,7 +105,7 @@ extension ChracterTableViewController: UISearchResultsUpdating {
     }
     
     private func filterContentForSearchText(_ searchText: String) {
-        filteredChracter = chracter?.results.filter { chracter in
+        filteredChracter = rickAndMorty?.results.filter { chracter in
             chracter.name.lowercased().contains(searchText.lowercased())
         } ?? []
         

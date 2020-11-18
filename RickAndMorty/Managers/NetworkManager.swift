@@ -27,9 +27,9 @@ class NetworkManager {
             guard let data = data else { return }
             
             do {
-                let character = try JSONDecoder().decode(RickAndMorty.self, from: data)
+                let rickAndMorty = try JSONDecoder().decode(RickAndMorty.self, from: data)
                 DispatchQueue.main.async {
-                    complition(character)
+                    complition(rickAndMorty)
                 }
             } catch let error {
                 print(error)
