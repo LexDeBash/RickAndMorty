@@ -71,7 +71,7 @@
 				A82B8637240E3F3500139807 /* Models */,
 				A82B8634240E3EF600139807 /* ViewControllers */,
 				A82B863E240E408000139807 /* Views */,
-				A82B8639240E3F4800139807 /* Managers */,
+				A82B8639240E3F4800139807 /* Services */,
 				A82B8633240E3EAC00139807 /* SupportingFiles */,
 				A82B8635240E3F1300139807 /* Storyboards */,
 				A82B8636240E3F2600139807 /* Sourse */,
@@ -125,12 +125,12 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		A82B8639240E3F4800139807 /* Managers */ = {
+		A82B8639240E3F4800139807 /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				A82B8643240E411E00139807 /* NetworkManager.swift */,
 			);
-			path = Managers;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		A82B863E240E408000139807 /* Views */ = {
