@@ -11,9 +11,9 @@ import UIKit
 class CharcterDetailsViewController: UIViewController {
     
     // MARK: - IBOutlets
-    @IBOutlet weak var chracterImageView: UIImageView! {
+    @IBOutlet weak var chаracterImageView: UIImageView! {
         didSet {
-            chracterImageView.layer.cornerRadius = chracterImageView.frame.width / 2
+            chаracterImageView.layer.cornerRadius = chаracterImageView.frame.width / 2
         }
     }
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -38,7 +38,7 @@ class CharcterDetailsViewController: UIViewController {
             self.descriptionLabel.text = result.description
             guard let imageData = ImageManager.shared.fetchImage(from: result.image) else { return }
             DispatchQueue.main.async {
-                self.chracterImageView.image = UIImage(data: imageData)
+                self.chаracterImageView.image = UIImage(data: imageData)
                 self.spinnerView.stopAnimating()
             }
         }
