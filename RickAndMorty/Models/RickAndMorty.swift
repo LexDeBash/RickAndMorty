@@ -8,7 +8,7 @@
 
 struct RickAndMorty: Decodable {
     let info: Info
-    let results: [Result]
+    let results: [Character]
 }
 
 struct Info: Decodable {
@@ -17,7 +17,7 @@ struct Info: Decodable {
     let prev: String?
 }
 
-struct Result: Decodable {
+struct Character: Decodable {
     let name: String
     let status: String
     let species: String

@@ -24,11 +24,16 @@ class EpisodeDetailsViewController: UIViewController {
             blue: 66/255,
             alpha: 1
         )
-        NetworkManager.shared.fetchEpisode(from: episodeUrl) { episode in
-            self.episode = episode
-            self.title = episode.episode
-            self.episodeDescriptionLabel.text = episode.description
-            self.tableView.reloadData()
+        NetworkManager.shared.fetchEpisode(from: episodeUrl) { result in
+            switch result {
+            case .success(let episode):
+                self.episode = episode
+                self.title = episode.episode
+                self.episodeDescriptionLabel.text = episode.description
+                self.tableView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
         }
     }
     

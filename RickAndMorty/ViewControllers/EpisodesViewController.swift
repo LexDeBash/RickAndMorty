@@ -10,7 +10,7 @@ import UIKit
 
 class EpisodesViewController: UITableViewController {
     
-    var result: Result!
+    var result: Character!
 
     override func viewDidLoad() {
         super.viewDidLoad()

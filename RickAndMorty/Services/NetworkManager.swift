@@ -38,7 +38,7 @@ class NetworkManager {
         }.resume()
     }
     
-    func fetchEpisode(from url: String, completion: @escaping(Episode) -> Void) {
+    func fetchEpisode(from url: String, completion: @escaping(Result<Episode, Error>) -> Void) {
         guard let url = URL(string: url) else { return }
         
         URLSession.shared.dataTask(with: url) { (data, _, error) in
@@ -50,15 +50,15 @@ class NetworkManager {
             do {
                 let episode = try JSONDecoder().decode(Episode.self, from: data)
                 DispatchQueue.main.async {
-                    completion(episode)
+                    completion(.success(episode))
                 }
             } catch let error {
-                print(error)
+                completion(.failure(error))
             }
         }.resume()
     }
     
-    func fetchCharacter(from url: String, completion: @escaping(Result) -> Void) {
+    func fetchCharacter(from url: String, completion: @escaping(Character) -> Void) {
         guard let url = URL(string: url) else { return }
         
         URLSession.shared.dataTask(with: url) { (data, _, error) in
@@ -68,7 +68,7 @@ class NetworkManager {
             }
             
             do {
-                let result = try JSONDecoder().decode(Result.self, from: data)
+                let result = try JSONDecoder().decode(Character.self, from: data)
                 DispatchQueue.main.async {
                     completion(result)
                 }

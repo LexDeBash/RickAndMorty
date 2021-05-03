@@ -19,7 +19,7 @@ class CharcterDetailsViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
 
     // MARK: - Public properties
-    var result: Result?
+    var result: Character?
     var charcterUrl: String!
     
     private var spinnerView: UIActivityIndicatorView!
