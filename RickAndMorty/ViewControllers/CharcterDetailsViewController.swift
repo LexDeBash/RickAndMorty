@@ -17,7 +17,7 @@ class CharcterDetailsViewController: UIViewController {
             characterImageView.layer.cornerRadius = characterImageView.frame.width / 2
         }
     }
-
+    
     // MARK: - Public properties
     var character: Character!
     
@@ -51,9 +51,9 @@ class CharcterDetailsViewController: UIViewController {
     private func showSpinner(in view: UIView) -> UIActivityIndicatorView {
         let activityIndicator = UIActivityIndicatorView(style: .large)
         activityIndicator.color = .white
-        activityIndicator.startAnimating()
+//        activityIndicator.startAnimating()
         activityIndicator.center = view.center
-        activityIndicator.hidesWhenStopped = true
+//        activityIndicator.hidesWhenStopped = true
         
         view.addSubview(activityIndicator)
         

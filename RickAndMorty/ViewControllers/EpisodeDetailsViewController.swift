@@ -14,11 +14,17 @@ class EpisodeDetailsViewController: UIViewController {
     @IBOutlet var episodeDescriptionLabel: UILabel!
     
     var episode: Episode!
-    private var characters: [Character] = []
+    private var characters: [Character] = [] {
+        didSet {
+            if characters.count == episode.characters.count {
+                characters = characters.sorted { $0.id < $1.id }
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        getCharacters()
+        setCharacters()
         tableView.backgroundColor = UIColor(
             red: 21/255,
             green: 32/255,
@@ -34,8 +40,8 @@ class EpisodeDetailsViewController: UIViewController {
         detailsVC.character = sender as? Character
     }
     
-    private func getCharacters() {
-        for characterURL in episode.characters {
+    private func setCharacters() {
+        episode.characters.forEach { characterURL in
             NetworkManager.shared.fetchCharacter(from: characterURL) { character in
                 self.characters.append(character)
             }
