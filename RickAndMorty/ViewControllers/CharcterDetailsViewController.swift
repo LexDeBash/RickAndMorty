@@ -11,8 +11,8 @@ import UIKit
 class CharcterDetailsViewController: UIViewController {
     
     // MARK: - IBOutlets
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var characterImageView: UIImageView! {
+    @IBOutlet var descriptionLabel: UILabel!
+    @IBOutlet var characterImageView: UIImageView! {
         didSet {
             characterImageView.layer.cornerRadius = characterImageView.frame.width / 2
         }
@@ -21,16 +21,15 @@ class CharcterDetailsViewController: UIViewController {
     // MARK: - Public properties
     var character: Character!
     
-    private var spinnerView: UIActivityIndicatorView!
-    
+    private var spinnerView = UIActivityIndicatorView()
+        
     // MARK: - UIViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        spinnerView = showSpinner(in: characterImageView)
         if let topItem = navigationController?.navigationBar.topItem {
             topItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         }
-        
+        showSpinner(in: view)
         title = character.name
         descriptionLabel.text = character.description
         DispatchQueue.global().async {
@@ -40,6 +39,7 @@ class CharcterDetailsViewController: UIViewController {
                 self.spinnerView.stopAnimating()
             }
         }
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -48,15 +48,13 @@ class CharcterDetailsViewController: UIViewController {
         episodesVC.character = character
     }
     
-    private func showSpinner(in view: UIView) -> UIActivityIndicatorView {
-        let activityIndicator = UIActivityIndicatorView(style: .large)
-        activityIndicator.color = .white
-//        activityIndicator.startAnimating()
-        activityIndicator.center = view.center
-//        activityIndicator.hidesWhenStopped = true
+    private func showSpinner(in view: UIView) {
+        spinnerView = UIActivityIndicatorView(style: .large)
+        spinnerView.color = .white
+        spinnerView.startAnimating()
+        spinnerView.center = characterImageView.center
+        spinnerView.hidesWhenStopped = true
         
-        view.addSubview(activityIndicator)
-        
-        return activityIndicator
+        view.addSubview(spinnerView)
     }
 }
