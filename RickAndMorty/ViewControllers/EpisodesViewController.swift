@@ -10,7 +10,8 @@ import UIKit
 
 class EpisodesViewController: UITableViewController {
     
-    var result: Character!
+    var character: Character!
+    var episodes: [Episode] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,30 +38,38 @@ class EpisodesViewController: UITableViewController {
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        result.episode.count
+        character.episode.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "episode", for: indexPath)
 
         var content = cell.defaultContentConfiguration()
-        content.text = result.episode[indexPath.row]
+        let episodeURL = character.episode[indexPath.row]
         content.textProperties.color = .white
         content.textProperties.font = UIFont.boldSystemFont(ofSize: 18)
-        cell.contentConfiguration = content
+        NetworkManager.shared.fetchEpisode(from: episodeURL) { result in
+            switch result {
+            case .success(let episode):
+                self.episodes.append(episode)
+                content.text = episode.name
+                cell.contentConfiguration = content
+            case .failure(let error):
+                print(error)
+            }
+        }
 
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let episodeUrl = result.episode[indexPath.row]
-        performSegue(withIdentifier: "showEpisode", sender: episodeUrl)
+        let episode = episodes[indexPath.row]
+        performSegue(withIdentifier: "showEpisode", sender: episode)
     }
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let episodeDetailsVC = segue.destination as! EpisodeDetailsViewController
-        episodeDetailsVC.episodeUrl = sender as? String
+        episodeDetailsVC.episode = sender as? Episode
     }
-
 }

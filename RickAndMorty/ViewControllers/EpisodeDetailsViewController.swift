@@ -13,8 +13,7 @@ class EpisodeDetailsViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var episodeDescriptionLabel: UILabel!
     
-    var episodeUrl: String!
-    var episode: Episode?
+    var episode: Episode!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,17 +23,8 @@ class EpisodeDetailsViewController: UIViewController {
             blue: 66/255,
             alpha: 1
         )
-        NetworkManager.shared.fetchEpisode(from: episodeUrl) { result in
-            switch result {
-            case .success(let episode):
-                self.episode = episode
-                self.title = episode.episode
-                self.episodeDescriptionLabel.text = episode.description
-                self.tableView.reloadData()
-            case .failure(let error):
-                print(error)
-            }
-        }
+        title = episode.episode
+        episodeDescriptionLabel.text = episode.description
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -47,7 +37,7 @@ class EpisodeDetailsViewController: UIViewController {
 // MARK: - Table view data sourse
 extension EpisodeDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        episode?.characters.count ?? 0
+        episode.characters.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

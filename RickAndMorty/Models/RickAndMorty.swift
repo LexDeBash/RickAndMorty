@@ -52,8 +52,8 @@ struct Episode: Decodable {
     
     var description: String {
         """
-    episode: \(name)
-    date: \(date)
+    Title: \(name)
+    Date: \(date)
     """
     }
     
@@ -66,5 +66,5 @@ struct Episode: Decodable {
 }
 
 enum URLS: String {
-    case rickandmortyapi = "https://rickandmortyapi.com/api/character"
+    case rickAndMortyapi = "https://rickandmortyapi.com/api/character"
 }

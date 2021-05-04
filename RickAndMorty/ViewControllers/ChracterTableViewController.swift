@@ -31,7 +31,7 @@ class ChracterTableViewController: UITableViewController {
         
         setupNavigationBar()
         setupSearchController()
-        fetchData(from: URLS.rickandmortyapi.rawValue)
+        fetchData(from: URLS.rickAndMortyapi.rawValue)
     }
     
     // MARK: - Table view data source

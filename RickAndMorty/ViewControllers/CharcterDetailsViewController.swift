@@ -19,7 +19,7 @@ class CharcterDetailsViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
 
     // MARK: - Public properties
-    var result: Character?
+    var character: Character?
     var charcterUrl: String!
     
     private var spinnerView: UIActivityIndicatorView!
@@ -33,7 +33,7 @@ class CharcterDetailsViewController: UIViewController {
         }
        
         NetworkManager.shared.fetchCharacter(from: charcterUrl) { result in
-            self.result = result
+            self.character = result
             self.title = result.name
             self.descriptionLabel.text = result.description
             guard let imageData = ImageManager.shared.fetchImage(from: result.image) else { return }
@@ -47,7 +47,7 @@ class CharcterDetailsViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let navigationController = segue.destination as! UINavigationController
         let episodesVC = navigationController.topViewController as! EpisodesViewController
-        episodesVC.result = result
+        episodesVC.character = character
     }
     
     private func showSpinner(in view: UIView) -> UIActivityIndicatorView {
