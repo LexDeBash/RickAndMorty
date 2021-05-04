@@ -117,7 +117,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="chracterImageView" destination="Cnx-3A-4aw" id="UIo-9L-2AB"/>
+                        <outlet property="characterImageView" destination="Cnx-3A-4aw" id="UIo-9L-2AB"/>
                         <outlet property="descriptionLabel" destination="btk-vP-3AV" id="cjq-9d-gXV"/>
                     </connections>
                 </viewController>
@@ -185,15 +185,41 @@
                                 <rect key="frame" x="0.0" y="217" width="414" height="625"/>
                                 <color key="backgroundColor" red="0.082352941176470587" green="0.13333333333333333" blue="0.25882352941176467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="characterUrl" id="JAp-g6-SAi">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="70" id="0Io-0Z-FKn" customClass="TableViewCell" customModule="RickAndMorty">
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JAp-g6-SAi" id="cQV-hB-Age">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0Io-0Z-FKn" id="lwQ-ra-QUg">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" red="0.08235294118" green="0.1333333333" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ucY-Gp-j1T">
+                                                    <rect key="frame" x="16" y="10" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="3RX-4K-Ge0"/>
+                                                        <constraint firstAttribute="height" constant="50" id="cRi-8d-ceZ"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLV-rS-53t">
+                                                    <rect key="frame" x="73" y="21" width="305" height="21"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.082352941176470587" green="0.13333333333333333" blue="0.25882352941176467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="ucY-Gp-j1T" firstAttribute="leading" secondItem="lwQ-ra-QUg" secondAttribute="leading" constant="16" id="BjF-Ff-G1R"/>
+                                                <constraint firstItem="eLV-rS-53t" firstAttribute="leading" secondItem="ucY-Gp-j1T" secondAttribute="trailing" constant="7" id="Ha6-We-kZf"/>
+                                                <constraint firstItem="eLV-rS-53t" firstAttribute="top" secondItem="lwQ-ra-QUg" secondAttribute="topMargin" constant="10" id="I49-Re-Qlh"/>
+                                                <constraint firstAttribute="bottom" secondItem="ucY-Gp-j1T" secondAttribute="bottom" constant="10" id="RO6-DH-fiA"/>
+                                                <constraint firstItem="ucY-Gp-j1T" firstAttribute="top" secondItem="lwQ-ra-QUg" secondAttribute="top" constant="10" id="akb-3Y-hxI"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="eLV-rS-53t" secondAttribute="trailing" constant="16" id="eic-sY-Hmf"/>
+                                            </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.08235294118" green="0.1333333333" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="characterImageView" destination="ucY-Gp-j1T" id="CjG-BF-C93"/>
+                                            <outlet property="nameLabel" destination="eLV-rS-53t" id="7gB-3f-9yE"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -314,7 +340,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="N43-Xl-pbe"/>
                     <connections>
-                        <outlet property="chracterImageView" destination="KXz-hn-vnn" id="RZq-ti-zBo"/>
+                        <outlet property="characterImageView" destination="KXz-hn-vnn" id="RZq-ti-zBo"/>
                         <outlet property="descriptionLabel" destination="swa-JS-xEg" id="aWu-PN-Vp5"/>
                     </connections>
                 </viewController>

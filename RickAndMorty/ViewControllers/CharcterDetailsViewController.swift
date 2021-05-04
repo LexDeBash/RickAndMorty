@@ -11,47 +11,35 @@ import UIKit
 class CharcterDetailsViewController: UIViewController {
     
     // MARK: - IBOutlets
-    @IBOutlet weak var chracterImageView: UIImageView! {
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var characterImageView: UIImageView! {
         didSet {
-            chracterImageView.layer.cornerRadius = chracterImageView.frame.width / 2
+            characterImageView.layer.cornerRadius = characterImageView.frame.width / 2
         }
     }
-    @IBOutlet weak var descriptionLabel: UILabel!
 
     // MARK: - Public properties
     var character: Character!
-//    var characterUrl: String!
     
     private var spinnerView: UIActivityIndicatorView!
     
     // MARK: - UIViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        spinnerView = showSpinner(in: view)
+        spinnerView = showSpinner(in: characterImageView)
         if let topItem = navigationController?.navigationBar.topItem {
             topItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         }
         
         title = character.name
         descriptionLabel.text = character.description
-        guard let imageData = ImageManager.shared.fetchImage(from: character.image) else { return }
-        DispatchQueue.main.async {
-            self.chracterImageView.image = UIImage(data: imageData)
-            self.spinnerView.stopAnimating()
-        }
-       
-        /*
-        NetworkManager.shared.fetchCharacter(from: characterUrl) { character in
-            self.character = character
-            self.title = character.name
-            self.descriptionLabel.text = character.description
-            guard let imageData = ImageManager.shared.fetchImage(from: character.image) else { return }
+        DispatchQueue.global().async {
+            guard let imageData = ImageManager.shared.fetchImage(from: self.character.image) else { return }
             DispatchQueue.main.async {
-                self.chracterImageView.image = UIImage(data: imageData)
+                self.characterImageView.image = UIImage(data: imageData)
                 self.spinnerView.stopAnimating()
             }
         }
-        */
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

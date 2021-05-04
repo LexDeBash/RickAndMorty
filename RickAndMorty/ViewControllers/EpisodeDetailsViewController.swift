@@ -14,10 +14,11 @@ class EpisodeDetailsViewController: UIViewController {
     @IBOutlet var episodeDescriptionLabel: UILabel!
     
     var episode: Episode!
-    var characters: [Character] = []
+    private var characters: [Character] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        getCharacters()
         tableView.backgroundColor = UIColor(
             red: 21/255,
             green: 32/255,
@@ -32,7 +33,14 @@ class EpisodeDetailsViewController: UIViewController {
         let detailsVC = segue.destination as! CharcterDetailsViewController
         detailsVC.character = sender as? Character
     }
-
+    
+    private func getCharacters() {
+        for characterURL in episode.characters {
+            NetworkManager.shared.fetchCharacter(from: characterURL) { character in
+                self.characters.append(character)
+            }
+        }
+    }
 }
 
 // MARK: - Table view data sourse
@@ -42,18 +50,11 @@ extension EpisodeDetailsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "characterUrl", for: indexPath)
-        
-        var content = cell.defaultContentConfiguration()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
         let characterURL = episode.characters[indexPath.row]
-        content.textProperties.color = .white
-        content.textProperties.font = UIFont.boldSystemFont(ofSize: 18)
         NetworkManager.shared.fetchCharacter(from: characterURL) { character in
-            self.characters.append(character)
-            content.text = character.name
-            cell.contentConfiguration = content
+            cell.configure(with: character)
         }
-        
         return cell
     }
 }
