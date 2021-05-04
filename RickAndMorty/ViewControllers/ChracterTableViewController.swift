@@ -54,7 +54,7 @@ class ChracterTableViewController: UITableViewController {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
         let character = isFiltering ? filteredChracter[indexPath.row] : rickAndMorty?.results[indexPath.row]
         let detailVC = segue.destination as! CharcterDetailsViewController
-        detailVC.charcterUrl = character?.url
+        detailVC.character = character
     }
     
     @IBAction func updateData(_ sender: UIBarButtonItem) {

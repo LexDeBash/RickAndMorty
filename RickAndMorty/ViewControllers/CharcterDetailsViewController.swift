@@ -19,8 +19,8 @@ class CharcterDetailsViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
 
     // MARK: - Public properties
-    var character: Character?
-    var charcterUrl: String!
+    var character: Character!
+//    var characterUrl: String!
     
     private var spinnerView: UIActivityIndicatorView!
     
@@ -31,8 +31,17 @@ class CharcterDetailsViewController: UIViewController {
         if let topItem = navigationController?.navigationBar.topItem {
             topItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         }
+        
+        title = character.name
+        descriptionLabel.text = character.description
+        guard let imageData = ImageManager.shared.fetchImage(from: character.image) else { return }
+        DispatchQueue.main.async {
+            self.chracterImageView.image = UIImage(data: imageData)
+            self.spinnerView.stopAnimating()
+        }
        
-        NetworkManager.shared.fetchCharacter(from: charcterUrl) { character in
+        /*
+        NetworkManager.shared.fetchCharacter(from: characterUrl) { character in
             self.character = character
             self.title = character.name
             self.descriptionLabel.text = character.description
@@ -42,6 +51,7 @@ class CharcterDetailsViewController: UIViewController {
                 self.spinnerView.stopAnimating()
             }
         }
+        */
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

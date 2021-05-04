@@ -14,6 +14,7 @@ class EpisodeDetailsViewController: UIViewController {
     @IBOutlet var episodeDescriptionLabel: UILabel!
     
     var episode: Episode!
+    var characters: [Character] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +30,7 @@ class EpisodeDetailsViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let detailsVC = segue.destination as! CharcterDetailsViewController
-        detailsVC.charcterUrl = sender as? String
+        detailsVC.character = sender as? Character
     }
 
 }
@@ -48,6 +49,7 @@ extension EpisodeDetailsViewController: UITableViewDataSource {
         content.textProperties.color = .white
         content.textProperties.font = UIFont.boldSystemFont(ofSize: 18)
         NetworkManager.shared.fetchCharacter(from: characterURL) { character in
+            self.characters.append(character)
             content.text = character.name
             cell.contentConfiguration = content
         }
@@ -60,7 +62,7 @@ extension EpisodeDetailsViewController: UITableViewDataSource {
 extension EpisodeDetailsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let characterUrl = episode?.characters[indexPath.row]
-        performSegue(withIdentifier: "showCharacter", sender: characterUrl)
+        let character = characters[indexPath.row]
+        performSegue(withIdentifier: "showCharacter", sender: character)
     }
 }
