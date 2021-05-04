@@ -44,10 +44,13 @@ extension EpisodeDetailsViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "characterUrl", for: indexPath)
         
         var content = cell.defaultContentConfiguration()
-        content.text = episode?.characters[indexPath.row]
+        let characterURL = episode.characters[indexPath.row]
         content.textProperties.color = .white
         content.textProperties.font = UIFont.boldSystemFont(ofSize: 18)
-        cell.contentConfiguration = content
+        NetworkManager.shared.fetchCharacter(from: characterURL) { character in
+            content.text = character.name
+            cell.contentConfiguration = content
+        }
         
         return cell
     }

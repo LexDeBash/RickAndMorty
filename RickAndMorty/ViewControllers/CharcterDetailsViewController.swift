@@ -32,11 +32,11 @@ class CharcterDetailsViewController: UIViewController {
             topItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         }
        
-        NetworkManager.shared.fetchCharacter(from: charcterUrl) { result in
-            self.character = result
-            self.title = result.name
-            self.descriptionLabel.text = result.description
-            guard let imageData = ImageManager.shared.fetchImage(from: result.image) else { return }
+        NetworkManager.shared.fetchCharacter(from: charcterUrl) { character in
+            self.character = character
+            self.title = character.name
+            self.descriptionLabel.text = character.description
+            guard let imageData = ImageManager.shared.fetchImage(from: character.image) else { return }
             DispatchQueue.main.async {
                 self.chracterImageView.image = UIImage(data: imageData)
                 self.spinnerView.stopAnimating()

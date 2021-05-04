@@ -43,8 +43,8 @@ class ChracterTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
         
-        let result = isFiltering ? filteredChracter[indexPath.row] : rickAndMorty?.results[indexPath.row]
-        cell.configure(with: result)
+        let character = isFiltering ? filteredChracter[indexPath.row] : rickAndMorty?.results[indexPath.row]
+        cell.configure(with: character)
     
         return cell
     }
