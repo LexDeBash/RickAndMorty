@@ -36,7 +36,7 @@ class EpisodeDetailsViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let detailsVC = segue.destination as! CharcterDetailsViewController
+        let detailsVC = segue.destination as! CharacterDetailsViewController
         detailsVC.character = sender as? Character
     }
     

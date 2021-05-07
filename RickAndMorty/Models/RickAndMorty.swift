@@ -67,5 +67,5 @@ struct Episode: Decodable {
 }
 
 enum URLS: String {
-    case rickAndMortyapi = "https://rickandmortyapi.com/api/character"
+    case rickAndMortyApi = "https://rickandmortyapi.com/api/character"
 }

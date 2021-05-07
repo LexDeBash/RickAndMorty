@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="70" id="qEx-Lu-rew" customClass="TableViewCell" customModule="RickAndMorty">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="70" id="qEx-Lu-rew" customClass="TableViewCell" customModule="RickAndMorty">
                                 <rect key="frame" x="0.0" y="24.5" width="414" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qEx-Lu-rew" id="JZL-4S-nJr">
@@ -77,10 +77,10 @@
             </objects>
             <point key="canvasLocation" x="2728.985507246377" y="112.5"/>
         </scene>
-        <!--Charcter Details View Controller-->
+        <!--Character Details View Controller-->
         <scene sceneID="mjj-bO-c9w">
             <objects>
-                <viewController id="W46-zo-kgg" customClass="CharcterDetailsViewController" customModule="RickAndMorty" sceneMemberID="viewController">
+                <viewController id="W46-zo-kgg" customClass="CharacterDetailsViewController" customModule="RickAndMorty" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="73q-jb-xoa">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -306,10 +306,10 @@
             </objects>
             <point key="canvasLocation" x="4143" y="110"/>
         </scene>
-        <!--Charcter Details View Controller-->
+        <!--Character Details View Controller-->
         <scene sceneID="YJ5-qP-kul">
             <objects>
-                <viewController id="KWf-tl-WxV" customClass="CharcterDetailsViewController" customModule="RickAndMorty" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="KWf-tl-WxV" customClass="CharacterDetailsViewController" customModule="RickAndMorty" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VUN-6e-uTI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

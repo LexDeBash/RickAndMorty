@@ -13,7 +13,7 @@ class ChracterTableViewController: UITableViewController {
     //MARK: Private properties
     private var rickAndMorty: RickAndMorty?
     private let searchController = UISearchController(searchResultsController: nil)
-    private var filteredChracter: [Character] = []
+    private var filteredCharacter: [Character] = []
     private var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
         return text.isEmpty
@@ -31,19 +31,19 @@ class ChracterTableViewController: UITableViewController {
         
         setupNavigationBar()
         setupSearchController()
-        fetchData(from: URLS.rickAndMortyapi.rawValue)
+        fetchData(from: URLS.rickAndMortyApi.rawValue)
     }
     
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        isFiltering ? filteredChracter.count : rickAndMorty?.results.count ?? 0
+        isFiltering ? filteredCharacter.count : rickAndMorty?.results.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell else { return UITableViewCell() }
         
-        let character = isFiltering ? filteredChracter[indexPath.row] : rickAndMorty?.results[indexPath.row]
+        let character = isFiltering ? filteredCharacter[indexPath.row] : rickAndMorty?.results[indexPath.row]
         cell.configure(with: character)
     
         return cell
@@ -52,8 +52,8 @@ class ChracterTableViewController: UITableViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
-        let character = isFiltering ? filteredChracter[indexPath.row] : rickAndMorty?.results[indexPath.row]
-        let detailVC = segue.destination as! CharcterDetailsViewController
+        let character = isFiltering ? filteredCharacter[indexPath.row] : rickAndMorty?.results[indexPath.row]
+        guard let detailVC = segue.destination as? CharacterDetailsViewController else { return }
         detailVC.character = character
     }
     
@@ -80,26 +80,20 @@ class ChracterTableViewController: UITableViewController {
     
     // Setup navigation bar
     private func setupNavigationBar() {
-        
         title = "Rick & Morty"
-        navigationController?.navigationBar.prefersLargeTitles = true
         
-        // Navigation bar appearance
-        if #available(iOS 13.0, *) {
-            let navBarAppearance = UINavigationBarAppearance()
-            navBarAppearance.configureWithOpaqueBackground()
-            navBarAppearance.backgroundColor = .black
-            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.configureWithOpaqueBackground()
+        navBarAppearance.backgroundColor = .black
+        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
 
-            navigationController?.navigationBar.standardAppearance = navBarAppearance
-            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-        }
-        
+        navigationController?.navigationBar.standardAppearance = navBarAppearance
+        navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
     }
     
     private func fetchData(from url: String?) {
-        NetworkManager.shared.fetchData(from: url) {  rickAndMorty in
+        NetworkManager.shared.fetchData(from: url) { rickAndMorty in
             self.rickAndMorty = rickAndMorty
             self.tableView.reloadData()
         }
@@ -109,12 +103,12 @@ class ChracterTableViewController: UITableViewController {
 // MARK: - UISearchResultsUpdating
 extension ChracterTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        filterContentForSearchText(searchController.searchBar.text!)
+        filterContentForSearchText(searchController.searchBar.text ?? "")
     }
     
     private func filterContentForSearchText(_ searchText: String) {
-        filteredChracter = rickAndMorty?.results.filter { chracter in
-            chracter.name.lowercased().contains(searchText.lowercased())
+        filteredCharacter = rickAndMorty?.results.filter { character in
+            character.name.lowercased().contains(searchText.lowercased())
         } ?? []
         
         tableView.reloadData()
