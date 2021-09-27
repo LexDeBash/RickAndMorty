@@ -8,28 +8,32 @@
 
 import Foundation
 
+enum NetworkError: Error {
+    case invalidURL
+    case noData
+    case decodingError
+}
+
 class NetworkManager {
     
     static let shared = NetworkManager()
     
     private init() {}
     
-    func fetchData(from url: String?, with complition: @escaping (RickAndMorty) -> Void) {
+    func fetchData(from url: String?, with completion: @escaping(RickAndMorty) -> Void) {
         guard let stringURL = url else { return }
         guard let url = URL(string: stringURL) else { return }
         
-        URLSession.shared.dataTask(with: url) { (data, _, error) in
-            if let error = error {
-                print(error)
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            guard let data = data else {
+                print(error?.localizedDescription ?? "No error description")
                 return
             }
-            
-            guard let data = data else { return }
             
             do {
                 let rickAndMorty = try JSONDecoder().decode(RickAndMorty.self, from: data)
                 DispatchQueue.main.async {
-                    complition(rickAndMorty)
+                    completion(rickAndMorty)
                 }
             } catch let error {
                 print(error)
@@ -38,12 +42,16 @@ class NetworkManager {
         }.resume()
     }
     
-    func fetchEpisode(from url: String, completion: @escaping(Result<Episode, Error>) -> Void) {
-        guard let url = URL(string: url) else { return }
+    func fetchEpisode(from url: String, completion: @escaping(Result<Episode, NetworkError>) -> Void) {
+        guard let url = URL(string: url) else {
+            completion(.failure(.invalidURL))
+            return
+        }
         
-        URLSession.shared.dataTask(with: url) { (data, _, error) in
+        URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data else {
-                print(error?.localizedDescription ?? "no descripption")
+                completion(.failure(.noData))
+                print(error?.localizedDescription ?? "no description")
                 return
             }
             
@@ -52,8 +60,8 @@ class NetworkManager {
                 DispatchQueue.main.async {
                     completion(.success(episode))
                 }
-            } catch let error {
-                completion(.failure(error))
+            } catch {
+                completion(.failure(.decodingError))
             }
         }.resume()
     }
@@ -63,7 +71,7 @@ class NetworkManager {
         
         URLSession.shared.dataTask(with: url) { (data, _, error) in
             guard let data = data else {
-                print(error?.localizedDescription ?? "no descripption")
+                print(error?.localizedDescription ?? "no description")
                 return
             }
             
