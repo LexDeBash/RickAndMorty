@@ -32,14 +32,15 @@ class CharacterDetailsViewController: UIViewController {
         showSpinner(in: view)
         title = character.name
         descriptionLabel.text = character.description
-        DispatchQueue.global().async {
-            guard let imageData = ImageManager.shared.fetchImage(from: self.character.image) else { return }
-            DispatchQueue.main.async {
+        NetworkManager.shared.fetchImage(from: self.character.image) { result in
+            switch result {
+            case .success(let imageData):
                 self.characterImageView.image = UIImage(data: imageData)
                 self.spinnerView.stopAnimating()
+            case .failure(let error):
+                print(error)
             }
         }
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

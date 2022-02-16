@@ -42,14 +42,19 @@ class EpisodeDetailsViewController: UIViewController {
     
     private func setCharacters() {
         episode.characters.forEach { characterURL in
-            NetworkManager.shared.fetchCharacter(from: characterURL) { character in
-                self.characters.append(character)
+            NetworkManager.shared.fetchData(Character.self, from: characterURL) { result in
+                switch result {
+                case .success(let character):
+                    self.characters.append(character)
+                case .failure(let error):
+                    print(error)
+                }
             }
         }
     }
 }
 
-// MARK: - Table view data sourse
+// MARK: - Table view data source
 extension EpisodeDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         episode.characters.count
@@ -58,8 +63,13 @@ extension EpisodeDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
         let characterURL = episode.characters[indexPath.row]
-        NetworkManager.shared.fetchCharacter(from: characterURL) { character in
-            cell.configure(with: character)
+        NetworkManager.shared.fetchData(Character.self, from: characterURL) { result in
+            switch result {
+            case .success(let character):
+                cell.configure(with: character)
+            case .failure(let error):
+                print(error)
+            }
         }
         return cell
     }

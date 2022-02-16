@@ -1,5 +1,5 @@
 //
-//  ChracterTableViewController.swift
+//  CharactersTableViewController.swift
 //  RickAndMorty
 //
 //  Created by Alexey Efimov on 03.03.2020.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChracterTableViewController: UITableViewController {
+class CharactersTableViewController: UITableViewController {
     
     //MARK: Private properties
     private var rickAndMorty: RickAndMorty?
@@ -31,11 +31,10 @@ class ChracterTableViewController: UITableViewController {
         
         setupNavigationBar()
         setupSearchController()
-        fetchData(from: URLS.rickAndMortyApi.rawValue)
+        fetchData(from: Link.rickAndMortyApi.rawValue)
     }
     
     // MARK: - Table view data source
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         isFiltering ? filteredCharacter.count : rickAndMorty?.results.count ?? 0
     }
@@ -78,10 +77,8 @@ class ChracterTableViewController: UITableViewController {
         }
     }
     
-    // Setup navigation bar
     private func setupNavigationBar() {
         title = "Rick & Morty"
-        
         let navBarAppearance = UINavigationBarAppearance()
         navBarAppearance.configureWithOpaqueBackground()
         navBarAppearance.backgroundColor = .black
@@ -93,15 +90,20 @@ class ChracterTableViewController: UITableViewController {
     }
     
     private func fetchData(from url: String?) {
-        NetworkManager.shared.fetchData(from: url) { rickAndMorty in
-            self.rickAndMorty = rickAndMorty
-            self.tableView.reloadData()
+        NetworkManager.shared.fetchData(RickAndMorty.self, from: url) { result in
+            switch result {
+            case .success(let rickAndMorty):
+                self.rickAndMorty = rickAndMorty
+                self.tableView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
         }
     }
 }
 
 // MARK: - UISearchResultsUpdating
-extension ChracterTableViewController: UISearchResultsUpdating {
+extension CharactersTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text ?? "")
     }
