@@ -48,10 +48,10 @@ class EpisodesViewController: UITableViewController {
         let episodeURL = character.episode[indexPath.row]
         content.textProperties.color = .white
         content.textProperties.font = UIFont.boldSystemFont(ofSize: 18)
-        NetworkManager.shared.fetchData(Episode.self, from: episodeURL) { result in
+        NetworkManager.shared.fetchData(Episode.self, from: episodeURL) { [weak self] result in
             switch result {
             case .success(let episode):
-                self.episodes.append(episode)
+                self?.episodes.append(episode)
                 content.text = episode.name
                 cell.contentConfiguration = content
             case .failure(let error):

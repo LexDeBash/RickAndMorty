@@ -40,26 +40,34 @@ class CharactersTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell else { return UITableViewCell() }
-        
-        let character = isFiltering ? filteredCharacter[indexPath.row] : rickAndMorty?.results[indexPath.row]
+        guard
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: "cell",
+                for: indexPath
+            ) as? TableViewCell else {
+            return UITableViewCell()
+        }
+        let character = isFiltering
+        ? filteredCharacter[indexPath.row]
+        : rickAndMorty?.results[indexPath.row]
         cell.configure(with: character)
-    
         return cell
     }
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
-        let character = isFiltering ? filteredCharacter[indexPath.row] : rickAndMorty?.results[indexPath.row]
+        let character = isFiltering
+        ? filteredCharacter[indexPath.row]
+        : rickAndMorty?.results[indexPath.row]
         guard let detailVC = segue.destination as? CharacterDetailsViewController else { return }
         detailVC.character = character
     }
     
     @IBAction func updateData(_ sender: UIBarButtonItem) {
         sender.tag == 1
-            ? fetchData(from: rickAndMorty?.info.next)
-            : fetchData(from: rickAndMorty?.info.prev)
+        ? fetchData(from: rickAndMorty?.info.next)
+        : fetchData(from: rickAndMorty?.info.prev)
     }
     
     // MARK: - Private methods
@@ -90,11 +98,11 @@ class CharactersTableViewController: UITableViewController {
     }
     
     private func fetchData(from url: String?) {
-        NetworkManager.shared.fetchData(RickAndMorty.self, from: url) { result in
+        NetworkManager.shared.fetchData(RickAndMorty.self, from: url) { [weak self] result in
             switch result {
             case .success(let rickAndMorty):
-                self.rickAndMorty = rickAndMorty
-                self.tableView.reloadData()
+                self?.rickAndMorty = rickAndMorty
+                self?.tableView.reloadData()
             case .failure(let error):
                 print(error)
             }

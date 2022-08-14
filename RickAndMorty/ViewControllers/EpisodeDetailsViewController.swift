@@ -14,6 +14,7 @@ class EpisodeDetailsViewController: UIViewController {
     @IBOutlet var episodeDescriptionLabel: UILabel!
     
     var episode: Episode!
+    
     private var characters: [Character] = [] {
         didSet {
             if characters.count == episode.characters.count {
@@ -36,16 +37,16 @@ class EpisodeDetailsViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let detailsVC = segue.destination as! CharacterDetailsViewController
+        guard let detailsVC = segue.destination as? CharacterDetailsViewController else { return }
         detailsVC.character = sender as? Character
     }
     
     private func setCharacters() {
         episode.characters.forEach { characterURL in
-            NetworkManager.shared.fetchData(Character.self, from: characterURL) { result in
+            NetworkManager.shared.fetchData(Character.self, from: characterURL) { [weak self] result in
                 switch result {
                 case .success(let character):
-                    self.characters.append(character)
+                    self?.characters.append(character)
                 case .failure(let error):
                     print(error)
                 }
