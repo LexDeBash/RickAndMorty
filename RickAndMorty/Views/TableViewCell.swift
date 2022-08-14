@@ -24,12 +24,12 @@ class TableViewCell: UITableViewCell {
     // MARK: - Public methods
     func configure(with character: Character?) {
         nameLabel.text = character?.name
-        DispatchQueue.global().async {
-            guard let stringUrl = character?.image else { return }
-            guard let imageUrl = URL(string: stringUrl) else { return }
-            guard let imageData = try? Data(contentsOf: imageUrl) else { return }
-            DispatchQueue.main.async {
-                self.characterImageView.image = UIImage(data: imageData)
+        NetworkManager.shared.fetchImage(from: character?.image) { [weak self] result in
+            switch result {
+            case .success(let imageData):
+                self?.characterImageView.image = UIImage(data: imageData)
+            case .failure(let error):
+                print(error)
             }
         }
     }
