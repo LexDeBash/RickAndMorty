@@ -98,7 +98,7 @@ class CharactersTableViewController: UITableViewController {
     }
     
     private func fetchData(from url: String?) {
-        NetworkManager.shared.fetchData(RickAndMorty.self, from: url) { [weak self] result in
+        NetworkManager.shared.fetch(RickAndMorty.self, from: url) { [weak self] result in
             switch result {
             case .success(let rickAndMorty):
                 self?.rickAndMorty = rickAndMorty

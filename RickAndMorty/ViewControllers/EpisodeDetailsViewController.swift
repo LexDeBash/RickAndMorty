@@ -43,7 +43,7 @@ class EpisodeDetailsViewController: UIViewController {
     
     private func setCharacters() {
         episode.characters.forEach { characterURL in
-            NetworkManager.shared.fetchData(Character.self, from: characterURL) { [weak self] result in
+            NetworkManager.shared.fetch(Character.self, from: characterURL) { [weak self] result in
                 switch result {
                 case .success(let character):
                     self?.characters.append(character)
@@ -64,7 +64,7 @@ extension EpisodeDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
         let characterURL = episode.characters[indexPath.row]
-        NetworkManager.shared.fetchData(Character.self, from: characterURL) { result in
+        NetworkManager.shared.fetch(Character.self, from: characterURL) { result in
             switch result {
             case .success(let character):
                 cell.configure(with: character)
