@@ -40,18 +40,21 @@ class CharactersTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard
-            let cell = tableView.dequeueReusableCell(
-                withIdentifier: "cell",
-                for: indexPath
-            ) as? TableViewCell else {
-            return UITableViewCell()
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        guard let cell = cell as? TableViewCell else { return UITableViewCell() }
+        
         let character = isFiltering
         ? filteredCharacter[indexPath.row]
         : rickAndMorty?.results[indexPath.row]
         cell.configure(with: character)
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let results = rickAndMorty?.results else { return }
+        if results.count - indexPath.row <= 3 {
+            getNextPage(from: rickAndMorty?.info.next)
+        }
     }
     
     // MARK: - Navigation
@@ -92,7 +95,7 @@ class CharactersTableViewController: UITableViewController {
         navBarAppearance.backgroundColor = .black
         navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-
+        
         navigationController?.navigationBar.standardAppearance = navBarAppearance
         navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
     }
@@ -103,6 +106,19 @@ class CharactersTableViewController: UITableViewController {
             case .success(let rickAndMorty):
                 self?.rickAndMorty = rickAndMorty
                 self?.tableView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func getNextPage(from url: String?) {
+        NetworkManager.shared.fetch(RickAndMorty.self, from: url) { [weak self] result in
+            guard let self = self  else { return }
+            switch result {
+            case .success(let rickAndMorty):
+                self.rickAndMorty?.results.append(contentsOf: rickAndMorty.results)
+                self.tableView.reloadData()
             case .failure(let error):
                 print(error)
             }
