@@ -12,6 +12,7 @@ class CharactersTableViewController: UITableViewController {
     
     //MARK: Private properties
     private var rickAndMorty: RickAndMorty?
+    private var nextPage: String?
     private let searchController = UISearchController(searchResultsController: nil)
     private var filteredCharacter: [Character] = []
     private var searchBarIsEmpty: Bool {
@@ -53,7 +54,7 @@ class CharactersTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let results = rickAndMorty?.results else { return }
         if results.count - indexPath.row <= 3 {
-            getNextPage(from: rickAndMorty?.info.next)
+            getNextPage(from: nextPage)
         }
     }
     
@@ -105,6 +106,7 @@ class CharactersTableViewController: UITableViewController {
             switch result {
             case .success(let rickAndMorty):
                 self?.rickAndMorty = rickAndMorty
+                self?.nextPage = rickAndMorty.info.next
                 self?.tableView.reloadData()
             case .failure(let error):
                 print(error)
@@ -118,6 +120,7 @@ class CharactersTableViewController: UITableViewController {
             switch result {
             case .success(let rickAndMorty):
                 self.rickAndMorty?.results.append(contentsOf: rickAndMorty.results)
+                self.nextPage = rickAndMorty.info.next
                 self.tableView.reloadData()
             case .failure(let error):
                 print(error)
