@@ -6,6 +6,8 @@
 //  Copyright © 2020 Alexey Efimov. All rights reserved.
 //
 
+import Foundation
+
 struct RickAndMorty: Decodable {
     let info: Info
     let results: [Character]
@@ -13,8 +15,8 @@ struct RickAndMorty: Decodable {
 
 struct Info: Decodable {
     let pages: Int
-    let next: String?
-    let prev: String?
+    let next: URL?
+    let prev: URL?
 }
 
 struct Character: Decodable {
@@ -26,7 +28,7 @@ struct Character: Decodable {
     let origin: Location
     let location: Location
     let image: String
-    let episode: [String]
+    let episode: [URL]
     let url: String
     
     var description: String {
@@ -49,7 +51,7 @@ struct Episode: Decodable {
     let name: String
     let date: String
     let episode: String
-    let characters: [String]
+    let characters: [URL]
     
     var description: String {
         """
@@ -66,6 +68,13 @@ struct Episode: Decodable {
     }
 }
 
-enum Link: String {
-    case rickAndMortyApi = "https://rickandmortyapi.com/api/character"
+enum RickAndMortyAPI {
+    case baseURL
+    
+    var url: URL {
+        switch self {
+        case .baseURL:
+            return URL(string: "https://rickandmortyapi.com/api/character")!
+        }
+    }
 }

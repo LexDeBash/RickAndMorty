@@ -31,7 +31,7 @@ class CharactersTableViewController: UITableViewController {
         
         setupNavigationBar()
         setupSearchController()
-        fetchData(from: Link.rickAndMortyApi.rawValue)
+        fetchData(from: RickAndMortyAPI.baseURL.url)
     }
     
     // MARK: - Table view data source
@@ -97,7 +97,7 @@ class CharactersTableViewController: UITableViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
     }
     
-    private func fetchData(from url: String?) {
+    private func fetchData(from url: URL?) {
         NetworkManager.shared.fetch(RickAndMorty.self, from: url) { [weak self] result in
             switch result {
             case .success(let rickAndMorty):
