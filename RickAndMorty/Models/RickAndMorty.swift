@@ -19,7 +19,7 @@ struct Info: Decodable {
     let prev: URL?
 }
 
-struct Character: Decodable {
+struct Character: Identifiable, Decodable {
     let id: Int
     let name: String
     let status: String
@@ -65,16 +65,5 @@ struct Episode: Decodable {
         case date = "air_date"
         case episode = "episode"
         case characters = "characters"
-    }
-}
-
-enum RickAndMortyAPI {
-    case baseURL
-    
-    var url: URL {
-        switch self {
-        case .baseURL:
-            return URL(string: "https://rickandmortyapi.com/api/character")!
-        }
     }
 }

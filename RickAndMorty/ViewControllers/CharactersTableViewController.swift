@@ -108,6 +108,10 @@ class CharactersTableViewController: UITableViewController {
             }
         }
     }
+    
+//    private func sendRequest() {
+//        self.rickAndMorty?.results = try! await RickAndMortyAPI.CharacterRoute.searchWith(filters: [.name("morty")])!
+//    }
 }
 
 // MARK: - UISearchResultsUpdating
