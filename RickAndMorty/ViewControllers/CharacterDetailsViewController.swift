@@ -31,24 +31,18 @@ final class CharacterDetailsViewController: UIViewController {
         if let topItem = navigationController?.navigationBar.topItem {
             topItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         }
-        showSpinner(in: view)
         title = character.name
         descriptionLabel.text = character.description
-        NetworkManager.shared.fetchImage(from: self.character.image) { result in
-            switch result {
-            case .success(let imageData):
-                self.characterImageView.image = UIImage(data: imageData)
-                self.spinnerView.stopAnimating()
-            case .failure(let error):
-                print(error)
-            }
-        }
+        showSpinner(in: view)
+        fetchImage()
     }
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let navigationController = segue.destination as! UINavigationController
-        let episodesVC = navigationController.topViewController as! EpisodesViewController
+        let navigationVC = segue.destination
+        guard let navigationVC = navigationVC as? UINavigationController else { return }
+        let episodesVC = navigationVC.topViewController
+        guard let episodesVC = episodesVC as? EpisodesViewController else { return }
         episodesVC.character = character
     }
     
@@ -59,7 +53,18 @@ final class CharacterDetailsViewController: UIViewController {
         spinnerView.startAnimating()
         spinnerView.center = characterImageView.center
         spinnerView.hidesWhenStopped = true
-        
         view.addSubview(spinnerView)
+    }
+    
+    private func fetchImage() {
+        networkManager.fetchImage(from: self.character.image) { result in
+            switch result {
+            case .success(let imageData):
+                self.characterImageView.image = UIImage(data: imageData)
+                self.spinnerView.stopAnimating()
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
