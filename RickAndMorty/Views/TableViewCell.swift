@@ -23,8 +23,9 @@ class TableViewCell: UITableViewCell {
     
     // MARK: - Public methods
     func configure(with character: Character?) {
-        nameLabel.text = character?.name
-        NetworkManager.shared.fetchImage(from: character?.image) { [weak self] result in
+        guard let character else { return }
+        nameLabel.text = character.name
+        NetworkManager.shared.fetchImage(from: character.image) { [weak self] result in
             switch result {
             case .success(let imageData):
                 self?.characterImageView.image = UIImage(data: imageData)
