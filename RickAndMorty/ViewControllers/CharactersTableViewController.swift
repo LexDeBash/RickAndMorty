@@ -22,8 +22,7 @@ class CharactersTableViewController: UITableViewController {
         return searchController.isActive && !searchBarIsEmpty
     }
     
-    // MARK: - UIViewController Methods
-    
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 70
@@ -32,26 +31,6 @@ class CharactersTableViewController: UITableViewController {
         setupNavigationBar()
         setupSearchController()
         fetchData(from: RickAndMortyAPI.baseURL.url)
-    }
-    
-    // MARK: - Table view data source
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        isFiltering ? filteredCharacter.count : rickAndMorty?.results.count ?? 0
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard
-            let cell = tableView.dequeueReusableCell(
-                withIdentifier: "cell",
-                for: indexPath
-            ) as? TableViewCell else {
-            return UITableViewCell()
-        }
-        let character = isFiltering
-        ? filteredCharacter[indexPath.row]
-        : rickAndMorty?.results[indexPath.row]
-        cell.configure(with: character)
-        return cell
     }
     
     // MARK: - Navigation
@@ -64,6 +43,7 @@ class CharactersTableViewController: UITableViewController {
         detailVC.character = character
     }
     
+    // MARK: - IB Actions
     @IBAction func updateData(_ sender: UIBarButtonItem) {
         sender.tag == 1
         ? fetchData(from: rickAndMorty?.info.next)
@@ -107,6 +87,26 @@ class CharactersTableViewController: UITableViewController {
                 print(error)
             }
         }
+    }
+}
+
+// MARK: - UITableViewDataSource
+extension CharactersTableViewController {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        isFiltering ? filteredCharacter.count : rickAndMorty?.results.count ?? 0
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: "cell",
+            for: indexPath
+        )
+        guard let cell = cell as? TableViewCell else { return UITableViewCell() }
+        let character = isFiltering
+            ? filteredCharacter[indexPath.row]
+            : rickAndMorty?.results[indexPath.row]
+        cell.configure(with: character)
+        return cell
     }
 }
 
