@@ -17,6 +17,32 @@ final class EpisodesViewController: UITableViewController {
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTableView()
+        setupNavigationController()
+    }
+
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let episodeDetailsVC = segue.destination as! EpisodeDetailsViewController
+        episodeDetailsVC.episode = sender as? Episode
+    }
+    
+    // MARK: - Private Methods
+    private func fetchEpisode(from url: URL, closure: @escaping(Episode) -> Void) {
+        networkManager.fetch(Episode.self, from: url) { result in
+            switch result {
+            case .success(let episode):
+                closure(episode)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+}
+
+// MARK: - Setup UI
+extension EpisodesViewController {
+    private func setupTableView() {
         tableView.rowHeight = 70
         tableView.backgroundColor = UIColor(
             red: 21/255,
@@ -24,7 +50,9 @@ final class EpisodesViewController: UITableViewController {
             blue: 66/255,
             alpha: 1
         )
-        
+    }
+    
+    private func setupNavigationController() {
         let navBarAppearance = UINavigationBarAppearance()
         navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         navBarAppearance.backgroundColor = UIColor(
@@ -37,6 +65,7 @@ final class EpisodesViewController: UITableViewController {
         navigationController?.navigationBar.standardAppearance = navBarAppearance
         navigationController?.navigationBar.barTintColor = .white
     }
+}
 
 // MARK: - UITableViewDataSource
 extension EpisodesViewController {
@@ -59,15 +88,14 @@ extension EpisodesViewController {
 
         return cell
     }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let episode = episodes[indexPath.row]
-        performSegue(withIdentifier: "showEpisode", sender: episode)
-    }
+}
 
-    // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let episodeDetailsVC = segue.destination as! EpisodeDetailsViewController
-        episodeDetailsVC.episode = sender as? Episode
+// MARK: - UITableViewDelegate
+extension EpisodesViewController {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let episodeURL = character.episode[indexPath.row]
+        fetchEpisode(from: episodeURL) { [unowned self] episode in
+            performSegue(withIdentifier: "showEpisode", sender: episode)
+        }
     }
 }
