@@ -10,6 +10,7 @@ import UIKit
 
 final class EpisodesViewController: UITableViewController {
     
+    // MARK: - Properties
     var character: Character!
     var episodes: [Episode] = []
 
@@ -36,27 +37,23 @@ final class EpisodesViewController: UITableViewController {
         navigationController?.navigationBar.barTintColor = .white
     }
 
-    // MARK: - Table view data source
+// MARK: - UITableViewDataSource
+extension EpisodesViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         character.episode.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "episode", for: indexPath)
+        let episodeURL = character.episode[indexPath.row]
 
         var content = cell.defaultContentConfiguration()
-        let episodeURL = character.episode[indexPath.row]
         content.textProperties.color = .white
         content.textProperties.font = UIFont.boldSystemFont(ofSize: 18)
-        NetworkManager.shared.fetch(Episode.self, from: episodeURL) { [weak self] result in
-            switch result {
-            case .success(let episode):
-                self?.episodes.append(episode)
-                content.text = episode.name
-                cell.contentConfiguration = content
-            case .failure(let error):
-                print(error)
-            }
+        
+        fetchEpisode(from: episodeURL) { episode in
+            content.text = episode.name
+            cell.contentConfiguration = content
         }
 
         return cell

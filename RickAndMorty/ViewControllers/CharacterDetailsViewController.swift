@@ -21,9 +21,11 @@ final class CharacterDetailsViewController: UIViewController {
     // MARK: - Public properties
     var character: Character!
     
+    // MARK: - Private Properties
+    private let networkManager = NetworkManager.shared
     private var spinnerView = UIActivityIndicatorView()
         
-    // MARK: - UIViewController Methods
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         if let topItem = navigationController?.navigationBar.topItem {
@@ -43,12 +45,14 @@ final class CharacterDetailsViewController: UIViewController {
         }
     }
     
+    // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let navigationController = segue.destination as! UINavigationController
         let episodesVC = navigationController.topViewController as! EpisodesViewController
         episodesVC.character = character
     }
     
+    // MARK: - Private Methods
     private func showSpinner(in view: UIView) {
         spinnerView = UIActivityIndicatorView(style: .large)
         spinnerView.color = .white

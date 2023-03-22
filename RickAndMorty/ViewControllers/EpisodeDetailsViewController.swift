@@ -10,9 +10,11 @@ import UIKit
 
 final class EpisodeDetailsViewController: UIViewController {
     
+    // MARK: - IB Outlets
     @IBOutlet var tableView: UITableView!
     @IBOutlet var episodeDescriptionLabel: UILabel!
     
+    // MARK: - Public Properties
     var episode: Episode!
     
     private var characters: [Character] = [] {
@@ -23,6 +25,7 @@ final class EpisodeDetailsViewController: UIViewController {
         }
     }
 
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setCharacters()
@@ -36,11 +39,13 @@ final class EpisodeDetailsViewController: UIViewController {
         episodeDescriptionLabel.text = episode.description
     }
     
+    // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let detailsVC = segue.destination as? CharacterDetailsViewController else { return }
         detailsVC.character = sender as? Character
     }
     
+    // MARK: - Private Methods
     private func setCharacters() {
         episode.characters.forEach { characterURL in
             NetworkManager.shared.fetch(Character.self, from: characterURL) { [weak self] result in
@@ -55,7 +60,7 @@ final class EpisodeDetailsViewController: UIViewController {
     }
 }
 
-// MARK: - Table view data source
+// MARK: - UITableViewDataSource
 extension EpisodeDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         episode.characters.count
@@ -76,7 +81,7 @@ extension EpisodeDetailsViewController: UITableViewDataSource {
     }
 }
 
-// MARK: - Table view delegate
+// MARK: - UITableViewDelegate
 extension EpisodeDetailsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
