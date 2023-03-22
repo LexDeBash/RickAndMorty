@@ -27,7 +27,7 @@ struct Character: Decodable {
     let gender: String
     let origin: Location
     let location: Location
-    let image: String
+    let image: URL
     let episode: [URL]
     let url: String
     
