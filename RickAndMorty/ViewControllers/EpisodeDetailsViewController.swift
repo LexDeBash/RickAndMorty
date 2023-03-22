@@ -17,6 +17,8 @@ final class EpisodeDetailsViewController: UIViewController {
     // MARK: - Public Properties
     var episode: Episode!
     
+    // MARK: - Private Properties
+    private let networkManager = NetworkManager.shared
     private var characters: [Character] = [] {
         didSet {
             if characters.count == episode.characters.count {
@@ -48,7 +50,7 @@ final class EpisodeDetailsViewController: UIViewController {
     // MARK: - Private Methods
     private func setCharacters() {
         episode.characters.forEach { characterURL in
-            NetworkManager.shared.fetch(Character.self, from: characterURL) { [weak self] result in
+            networkManager.fetch(Character.self, from: characterURL) { [weak self] result in
                 switch result {
                 case .success(let character):
                     self?.characters.append(character)

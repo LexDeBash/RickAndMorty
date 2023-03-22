@@ -12,8 +12,9 @@ final class EpisodesViewController: UITableViewController {
     
     // MARK: - Properties
     var character: Character!
-    var episodes: [Episode] = []
-
+    private let networkManager = NetworkManager.shared
+    
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 70

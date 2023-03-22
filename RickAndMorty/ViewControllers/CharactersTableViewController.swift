@@ -11,6 +11,7 @@ import UIKit
 final class CharactersTableViewController: UITableViewController {
     
     //MARK: Private properties
+    private let networkManager = NetworkManager.shared
     private var rickAndMorty: RickAndMorty?
     private let searchController = UISearchController(searchResultsController: nil)
     private var filteredCharacter: [Character] = []
@@ -78,7 +79,7 @@ final class CharactersTableViewController: UITableViewController {
     }
     
     private func fetchData(from url: URL?) {
-        NetworkManager.shared.fetch(RickAndMorty.self, from: url) { [weak self] result in
+        networkManager.fetch(RickAndMorty.self, from: url) { [weak self] result in
             switch result {
             case .success(let rickAndMorty):
                 self?.rickAndMorty = rickAndMorty
