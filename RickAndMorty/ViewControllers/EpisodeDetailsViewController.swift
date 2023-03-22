@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EpisodeDetailsViewController: UIViewController {
+final class EpisodeDetailsViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var episodeDescriptionLabel: UILabel!

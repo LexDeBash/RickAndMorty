@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CharacterDetailsViewController: UIViewController {
+final class CharacterDetailsViewController: UIViewController {
     
     // MARK: - IBOutlets
     @IBOutlet var descriptionLabel: UILabel!

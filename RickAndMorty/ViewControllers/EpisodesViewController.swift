@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EpisodesViewController: UITableViewController {
+final class EpisodesViewController: UITableViewController {
     
     var character: Character!
     var episodes: [Episode] = []

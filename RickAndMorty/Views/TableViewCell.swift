@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TableViewCell: UITableViewCell {
+final class TableViewCell: UITableViewCell {
     
     // MARK: IBOutlets
     @IBOutlet weak var nameLabel: UILabel!

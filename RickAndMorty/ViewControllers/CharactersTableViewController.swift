@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CharactersTableViewController: UITableViewController {
+final class CharactersTableViewController: UITableViewController {
     
     //MARK: Private properties
     private var rickAndMorty: RickAndMorty?
