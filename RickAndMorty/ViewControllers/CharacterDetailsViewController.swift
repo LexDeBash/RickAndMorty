@@ -57,7 +57,7 @@ final class CharacterDetailsViewController: UIViewController {
     }
     
     private func fetchImage() {
-        networkManager.fetchImage(from: self.character.image) { result in
+        networkManager.fetchImage(from: character.image) { result in
             switch result {
             case .success(let imageData):
                 self.characterImageView.image = UIImage(data: imageData)

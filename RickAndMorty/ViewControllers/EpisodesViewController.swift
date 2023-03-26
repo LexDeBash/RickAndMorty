@@ -23,7 +23,10 @@ final class EpisodesViewController: UITableViewController {
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let episodeDetailsVC = segue.destination as! EpisodeDetailsViewController
+        let episodeDetailsVC = segue.destination
+        guard let episodeDetailsVC = episodeDetailsVC as? EpisodeDetailsViewController else {
+            return
+        }
         episodeDetailsVC.episode = sender as? Episode
     }
     
