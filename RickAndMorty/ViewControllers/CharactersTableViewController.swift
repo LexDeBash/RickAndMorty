@@ -23,7 +23,7 @@ final class CharactersTableViewController: UITableViewController {
         return searchController.isActive && !searchBarIsEmpty
     }
     
-    // MARK: - Life Cycle
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 70
