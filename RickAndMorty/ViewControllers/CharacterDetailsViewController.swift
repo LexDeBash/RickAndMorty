@@ -33,7 +33,7 @@ final class CharacterDetailsViewController: UIViewController {
         }
         title = character.name
         descriptionLabel.text = character.description
-        showSpinner(in: view)
+        showSpinner(in: characterImageView)
         fetchImage()
     }
     
