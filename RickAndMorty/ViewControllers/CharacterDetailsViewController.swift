@@ -51,7 +51,7 @@ final class CharacterDetailsViewController: UIViewController {
         spinnerView = UIActivityIndicatorView(style: .large)
         spinnerView.color = .white
         spinnerView.startAnimating()
-        spinnerView.center = characterImageView.center
+        spinnerView.center = view.center
         spinnerView.hidesWhenStopped = true
         view.addSubview(spinnerView)
     }
