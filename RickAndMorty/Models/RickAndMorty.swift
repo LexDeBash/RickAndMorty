@@ -65,14 +65,3 @@ struct Episode: Decodable {
         case date = "air_date"
     }
 }
-
-enum RickAndMortyAPI {
-    case baseURL
-    
-    var url: URL {
-        switch self {
-        case .baseURL:
-            return URL(string: "https://rickandmortyapi.com/api/character")!
-        }
-    }
-}

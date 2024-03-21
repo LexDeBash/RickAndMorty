@@ -34,7 +34,7 @@ final class CharactersTableViewController: UITableViewController {
         
         setupNavigationBar()
         setupSearchController()
-        fetchData(from: RickAndMortyAPI.baseURL.url)
+        fetchData(from: NetworkManager.APIEndpoint.baseURL.url)
     }
     
     // MARK: - Navigation
